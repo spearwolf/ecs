@@ -1,0 +1,65 @@
+{
+  "name": "@spearwolf/ecs",
+  "version": "0.0.1",
+  "author": {
+    "name": "Wolfger Schramm",
+    "email": "wolfger@spearwolf.de",
+    "url": "https://github.com/spearwolf"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/spearwolf/ecs.git"
+  },
+  "license": "Apache-2.0",
+  "main": "dist/eventize.umd.js",
+  "module": "src/eventize.js",
+  "homepage": "https://github.com/spearwolf/ecs/",
+  "bugs": {
+    "url": "https://github.com/spearwolf/ecs/issues"
+  },
+  "scripts": {
+    "build:umd": "rollup -c scripts/rollup.config.umd.js",
+    "build:esm": "rollup -c scripts/rollup.config.esm.js",
+    "clean": "rimraf -f dist",
+    "build": "npm-run-all --silent --serial clean --parallel build:*",
+    "prepublishOnly": "npm-run-all --silent build",
+    "lint": "eslint src",
+    "jest": "jest",
+    "test": "run-s --silent lint jest"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.3.0",
+    "@babel/plugin-proposal-decorators": "^7.3.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.3.1",
+    "@babel/polyfill": "^7.2.5",
+    "@babel/preset-env": "^7.3.1",
+    "@spearwolf/eventize": "^0.6.6",
+    "babel-eslint": "^10.0.1",
+    "chai": "^4.2.0",
+    "eslint": "^5.13.0",
+    "eslint-config-problems": "^2.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jest": "^22.2.2",
+    "jest": "^24.1.0",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^2.6.3",
+    "rollup": "^1.1.2",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-node-resolve": "^4.0.0",
+    "rollup-plugin-terser": "^4.0.4",
+    "sinon": "^7.2.3"
+  },
+  "jest": {
+    "coverageDirectory": "<rootDir>/coverage",
+    "coverageReporters": [
+      "text",
+      "json",
+      "html"
+    ]
+  },
+  "peerDependencies": {
+    "@spearwolf/eventize": "^0.6.6"
+  }
+}
