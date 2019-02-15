@@ -12,9 +12,9 @@ describe('ChildrenComponent', () => {
   let entity;
   let entity2;
 
-  it('ECS#registerComponent()', () => {
+  it('ECS#registerComponentFactory()', () => {
     const factory = new ComponentFactory(ChildrenComponent);
-    ecs.registerComponent(ChildrenComponent.componentName(), factory);
+    ecs.registerComponentFactory(ChildrenComponent.componentName, factory);
     assert.strictEqual(ecs.getComponentFactory(ChildrenComponent), factory);
   });
 

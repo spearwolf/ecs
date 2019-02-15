@@ -1,9 +1,8 @@
 const CHILDREN = 'children';
 
 export default class ChildrenComponent {
-  static componentName() {
-    return CHILDREN;
-  }
+
+  static componentName = CHILDREN;
 
   constructor(entity, options) {
     this.entity = entity;
@@ -50,4 +49,5 @@ export default class ChildrenComponent {
       child.children.setParent(null);
     }
   }
+
 }

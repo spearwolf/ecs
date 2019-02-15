@@ -1,6 +1,7 @@
 import getComponentName from './getComponentName';
 
 export default class ComponentRegistry {
+
   constructor() {
     this.factories = new Map();
   }
@@ -12,10 +13,13 @@ export default class ComponentRegistry {
    * @param {function} componentFactory.update - update a component
    * @param {function} [componentFactory.destroy] - destroy a component
    */
-  registerComponent(name, componentFactory) {
+  registerComponentFactory(name, componentFactory) {
     this.factories.set(name, componentFactory);
   }
 
+  /**
+   * @param {string} name - component factory name
+   */
   getComponentFactory(name) {
     const componentName = getComponentName(name);
     const factory = this.factories.get(componentName);

@@ -9,7 +9,7 @@ import ChildrenComponent from './components/ChildrenComponent';
 describe('getComponentName', () => {
   describe('component constructor', () => {
     it('componentName as static function', () => {
-      assert.strictEqual(getComponentName(ChildrenComponent), ChildrenComponent.componentName());
+      assert.strictEqual(getComponentName(ChildrenComponent), ChildrenComponent.componentName);
     });
     it('componentName as static property', () => {
       class C { }

@@ -6,9 +6,8 @@ export const POST_RENDER_FRAME = 'postRenderFrame';
 const RENDERABLE = 'renderable';
 
 export default class RenderableComponent {
-  static componentName() {
-    return RENDERABLE;
-  }
+
+  static componentName = RENDERABLE;
 
   constructor(entity) {
     this.entity = entity;
@@ -25,4 +24,5 @@ export default class RenderableComponent {
     }
     entity.emit(POST_RENDER_FRAME, renderer);
   }
+
 }

@@ -5,8 +5,6 @@ export default (component) => {
       return component;
     case 'function': {
       switch (typeof component.componentName) {
-        case 'function':
-          return component.componentName();
         case 'string':
           return component.componentName;
         default:

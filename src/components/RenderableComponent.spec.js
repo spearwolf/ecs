@@ -5,14 +5,16 @@ import { assert } from 'chai';
 import sinon from 'sinon';
 
 import ECS from '../ECS';
-import ComponentFactory from '../ComponentFactory';
 
 import {
   ChildrenComponent,
   RenderableComponent,
 } from '.';
 
+import ComponentFactory from '../ComponentFactory';
+
 describe('RenderableComponent', () => {
+
   const ecs = new ECS();
 
   ComponentFactory.registerComponent(ecs, ChildrenComponent, RenderableComponent);
