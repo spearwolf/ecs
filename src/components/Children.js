@@ -1,7 +1,5 @@
 import { Component } from '../Component';
 
-const COMPONENT_NAME = 'children';
-
 class Children {
 
   constructor(entity, options) {
@@ -26,10 +24,10 @@ class Children {
   setParent(parent) {
     const prevParent = this.parent;
     this.parent = parent;
-    if (prevParent && prevParent.hasComponent(COMPONENT_NAME)) {
+    if (prevParent && prevParent.hasComponent(Children)) {
       prevParent.children.removeChild(this.entity);
     }
-    if (parent && parent.hasComponent(COMPONENT_NAME)) {
+    if (parent && parent.hasComponent(Children)) {
       if (!parent.children.hasChild(this.entity)) {
         parent.children.children.push(this.entity);
       }
@@ -45,11 +43,11 @@ class Children {
     if (idx >= 0) {
       this.children.splice(idx, 1);
     }
-    if (child.hasComponent(COMPONENT_NAME)) {
+    if (child.hasComponent(Children)) {
       child.children.setParent(null);
     }
   }
 
 }
 
-export default Component({ name: COMPONENT_NAME })(Children);
+export default Component({ name: 'children' })(Children);

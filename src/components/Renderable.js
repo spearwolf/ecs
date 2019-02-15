@@ -1,13 +1,10 @@
+import Children from './Children';
 import { Component } from '../Component';
 
-import Children from './Children';
-
-export const RENDER_FRAME = 'renderFrame';
-export const POST_RENDER_FRAME = 'postRenderFrame';
-
-const COMPONENT_NAME = 'renderable';
-
 class Renderable {
+
+  static $renderFrame = 'renderFrame';
+  static $postRenderFrame = 'postRenderFrame';
 
   constructor(entity) {
     this.entity = entity;
@@ -15,16 +12,16 @@ class Renderable {
 
   renderFrame(renderer) {
     const { entity } = this;
-    entity.emit(RENDER_FRAME, renderer);
+    entity.emit(Renderable.$renderFrame, renderer);
     if (entity.hasComponent(Children)) {
       entity.children.forEach(
         ({ renderable }) => renderable.renderFrame(renderer),
         Renderable,
       );
     }
-    entity.emit(POST_RENDER_FRAME, renderer);
+    entity.emit(Renderable.$postRenderFrame, renderer);
   }
 
 }
 
-export default Component({ name: COMPONENT_NAME })(Renderable);
+export default Component({ name: 'renderable' })(Renderable);
