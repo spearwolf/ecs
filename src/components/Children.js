@@ -1,21 +1,24 @@
 import { Component } from '../Component';
+import { EntityComponent } from '../EntityComponent';
 
-class Children {
+const callIf = (hasComponents, callback) => (child) => {
+  if (child.hasComponent(hasComponents)) {
+    // eslint-disable-next-line callback-return
+    callback(child);
+  }
+};
+
+class Children extends EntityComponent {
 
   constructor(entity, options) {
-    this.entity = entity;
+    super(entity);
     this.parent = options && options.parent;
     this.children = [];
   }
 
   forEach(callback, hasComponents) {
     if (hasComponents) {
-      this.children.forEach((child) => {
-        if (child.hasComponent(hasComponents)) {
-          // eslint-disable-next-line callback-return
-          callback(child);
-        }
-      });
+      this.children.forEach(callIf(hasComponents, callback));
     } else {
       this.children.forEach(callback);
     }

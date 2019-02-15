@@ -38,8 +38,8 @@ export default class ComponentRegistry {
   /**
    * Create a new component and attach it to the entity.
    */
-  createComponent(entity, name, data) {
-    const componentName = getComponentName(name);
+  createComponent(entity, componentClass, data) {
+    const componentName = getComponentName(componentClass);
     const factory = this.getComponentFactory(componentName);
     const component = factory.create(entity, data);
     entity.setComponent(componentName, component);

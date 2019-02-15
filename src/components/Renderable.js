@@ -1,25 +1,30 @@
-import Children from './Children';
 import { Component } from '../Component';
+import { EntityComponent } from '../EntityComponent';
 
-class Renderable {
+import Children from './Children';
+
+class Renderable extends EntityComponent {
 
   static $renderFrame = 'renderFrame';
   static $postRenderFrame = 'postRenderFrame';
 
-  constructor(entity) {
-    this.entity = entity;
-  }
-
   renderFrame(renderer) {
+
     const { entity } = this;
+
     entity.emit(Renderable.$renderFrame, renderer);
+
     if (entity.hasComponent(Children)) {
+
       entity.children.forEach(
         ({ renderable }) => renderable.renderFrame(renderer),
         Renderable,
       );
+
     }
+
     entity.emit(Renderable.$postRenderFrame, renderer);
+
   }
 
 }

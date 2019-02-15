@@ -18,21 +18,25 @@ export default class ECS extends ComponentRegistry {
    * @returns {Entity}
    */
   createEntity(components, id) {
-    const e = new Entity(this, id);
-    if (this.entities.has(e.id)) {
-      throw new Error(`ECS: duplicate entity.id='${e.id}' are not allowed`);
+    const entity = new Entity(this, id);
+
+    if (this.entities.has(entity.id)) {
+      throw new Error(`ECS: duplicate entity.id='${entity.id}' are not allowed`);
     }
-    this.entities.set(e.id, e);
+
+    this.entities.set(entity.id, entity);
+
     if (Array.isArray(components)) {
-      components.forEach((c) => {
-        if (Array.isArray(c)) {
-          this.createComponent(e, ...c);
+      components.forEach((componentClass) => {
+        if (Array.isArray(componentClass)) { // c => [componentClass, data]
+          this.createComponent(entity, ...componentClass);
         } else {
-          this.createComponent(e, c);
+          this.createComponent(entity, componentClass);
         }
       });
     }
-    return e;
+
+    return entity;
   }
 
   getEntity(id) {
