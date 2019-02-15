@@ -1,2 +1,2 @@
-export { default as ChildrenComponent } from './ChildrenComponent';
-export { default as RenderableComponent } from './RenderableComponent';
+export { default as Children } from './Children';
+export { default as Renderable } from './Renderable';

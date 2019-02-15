@@ -7,12 +7,6 @@
  */
 export default class ComponentFactory {
 
-  static registerComponent(registry, ...components) {
-    components.forEach((componentClass) => {
-      registry.registerComponentFactory(componentClass.componentName, new ComponentFactory(componentClass));
-    });
-  }
-
   constructor(componentClass) {
     this.componentClass = componentClass;
   }

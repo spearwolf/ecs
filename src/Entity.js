@@ -6,6 +6,7 @@ import getComponentName from './getComponentName';
 const hasComponent = entity => name => entity.components.has(getComponentName(name));
 
 export default class Entity {
+
   constructor(ecs, id = uuid()) {
     this.id = id;
     Object.defineProperties(this, {
@@ -56,4 +57,5 @@ export default class Entity {
       delete this[component];
     }
   }
+
 }

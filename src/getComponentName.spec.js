@@ -4,12 +4,12 @@
 import { assert } from 'chai';
 
 import getComponentName from './getComponentName';
-import ChildrenComponent from './components/ChildrenComponent';
+import { Children } from './components';
 
 describe('getComponentName', () => {
   describe('component constructor', () => {
     it('componentName as static function', () => {
-      assert.strictEqual(getComponentName(ChildrenComponent), ChildrenComponent.componentName);
+      assert.strictEqual(getComponentName(Children), Children.componentName);
     });
     it('componentName as static property', () => {
       class C { }

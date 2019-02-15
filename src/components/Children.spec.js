@@ -4,18 +4,18 @@
 import { assert } from 'chai';
 
 import ECS from '../ECS';
-import ComponentFactory from '../ComponentFactory';
-import ChildrenComponent from './ChildrenComponent';
+import Children from './Children';
 
-describe('ChildrenComponent', () => {
+describe('Children', () => {
   const ecs = new ECS();
   let entity;
   let entity2;
 
-  it('ECS#registerComponentFactory()', () => {
-    const factory = new ComponentFactory(ChildrenComponent);
-    ecs.registerComponentFactory(ChildrenComponent.componentName, factory);
-    assert.strictEqual(ecs.getComponentFactory(ChildrenComponent), factory);
+  it('ECS#registerComponent()', () => {
+    // const factory = new ComponentFactory(Children);
+    // ecs.registerComponent(factory);
+    ecs.registerComponent(Children);
+    assert.strictEqual(ecs.getComponentFactory(Children), Children.componentFactory);
   });
 
   it('ECS#createEntity()', () => {
@@ -24,12 +24,12 @@ describe('ChildrenComponent', () => {
   });
 
   it('ECS#createComponent()', () => {
-    ecs.createComponent(entity, ChildrenComponent);
-    assert.instanceOf(entity.children, ChildrenComponent, 'entity.children should be an instance of ChildrenComponent');
+    ecs.createComponent(entity, Children);
+    assert.instanceOf(entity.children, Children, 'entity.children should be an instance of Children');
   });
 
   it('setParent()', () => {
-    entity2 = ecs.createEntity([ChildrenComponent]);
+    entity2 = ecs.createEntity([Children]);
     entity.children.setParent(entity2);
     assert.strictEqual(entity.children.parent, entity2);
   });
@@ -39,8 +39,8 @@ describe('ChildrenComponent', () => {
   });
 
   it('entity.hasComponent()', () => {
-    assert.isTrue(entity.hasComponent(ChildrenComponent));
-    assert.isTrue(entity2.hasComponent([ChildrenComponent]));
+    assert.isTrue(entity.hasComponent(Children));
+    assert.isTrue(entity2.hasComponent([Children]));
     assert.isTrue(entity.hasComponent('children'));
     assert.isTrue(entity2.hasComponent(['children']));
   });

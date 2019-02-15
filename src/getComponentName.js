@@ -2,16 +2,13 @@
 export default (component) => {
   switch (typeof component) {
     case 'string':
+    case 'symbol':
       return component;
-    case 'function': {
-      switch (typeof component.componentName) {
-        case 'string':
-          return component.componentName;
-        default:
-          return undefined;
+    case 'function':
+    case 'object':
+      if (component !== null) {
+        return component.componentName;
       }
-    }
-    default:
-      return undefined;
   }
+  return undefined;
 };

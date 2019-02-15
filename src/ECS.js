@@ -2,9 +2,14 @@ import Entity from './Entity';
 import ComponentRegistry from './ComponentRegistry';
 
 export default class ECS extends ComponentRegistry {
-  constructor() {
+
+  constructor(components) {
     super();
     this.entities = new Map();
+
+    if (Array.isArray(components) && components.length) {
+      this.registerComponent(...components);
+    }
   }
 
   /**

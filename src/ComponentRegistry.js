@@ -7,14 +7,20 @@ export default class ComponentRegistry {
   }
 
   /**
-   * @param {string} name - component name
-   * @param {object} componentFactory - the component factory interface
-   * @param {function} componentFactory.create - create a new component object
-   * @param {function} componentFactory.update - update a component
-   * @param {function} [componentFactory.destroy] - destroy a component
+   * @param {string} componentName
+   * @param {object} componentFactroy - the component factory interface
    */
-  registerComponentFactory(name, componentFactory) {
-    this.factories.set(name, componentFactory);
+  registerComponentFactory(componentName, componentFactory) {
+    this.factories.set(componentName, componentFactory);
+  }
+
+  /**
+   * @param {...object} components
+   */
+  registerComponent(...components) {
+    components.forEach(({ componentName, componentFactory }) => {
+      this.factories.set(componentName, componentFactory);
+    })
   }
 
   /**

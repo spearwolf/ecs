@@ -1,8 +1,8 @@
-const CHILDREN = 'children';
+import { Component } from '../Component';
 
-export default class ChildrenComponent {
+const COMPONENT_NAME = 'children';
 
-  static componentName = CHILDREN;
+class Children {
 
   constructor(entity, options) {
     this.entity = entity;
@@ -26,10 +26,10 @@ export default class ChildrenComponent {
   setParent(parent) {
     const prevParent = this.parent;
     this.parent = parent;
-    if (prevParent && prevParent.hasComponent(CHILDREN)) {
+    if (prevParent && prevParent.hasComponent(COMPONENT_NAME)) {
       prevParent.children.removeChild(this.entity);
     }
-    if (parent && parent.hasComponent(CHILDREN)) {
+    if (parent && parent.hasComponent(COMPONENT_NAME)) {
       if (!parent.children.hasChild(this.entity)) {
         parent.children.children.push(this.entity);
       }
@@ -45,9 +45,11 @@ export default class ChildrenComponent {
     if (idx >= 0) {
       this.children.splice(idx, 1);
     }
-    if (child.hasComponent(CHILDREN)) {
+    if (child.hasComponent(COMPONENT_NAME)) {
       child.children.setParent(null);
     }
   }
 
 }
+
+export default Component({ name: COMPONENT_NAME })(Children);

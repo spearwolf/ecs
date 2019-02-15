@@ -7,25 +7,24 @@ import sinon from 'sinon';
 import ECS from '../ECS';
 
 import {
-  ChildrenComponent,
-  RenderableComponent,
+  Children,
+  Renderable,
 } from '.';
 
-import ComponentFactory from '../ComponentFactory';
+describe('Renderable', () => {
 
-describe('RenderableComponent', () => {
-
-  const ecs = new ECS();
-
-  ComponentFactory.registerComponent(ecs, ChildrenComponent, RenderableComponent);
+  const ecs = new ECS([
+    Children,
+    Renderable,
+  ]);
 
   it('createEntity()', () => {
-    const entity = ecs.createEntity([RenderableComponent]);
+    const entity = ecs.createEntity([Renderable]);
     assert.exists(entity);
   });
 
   it('renderFrame()', () => {
-    const entity = ecs.createEntity([RenderableComponent]);
+    const entity = ecs.createEntity([Renderable]);
     const renderFrameSpy = sinon.spy();
     const postRenderFrameSpy = sinon.spy();
 
@@ -42,9 +41,9 @@ describe('RenderableComponent', () => {
   });
 
   it('renderFrame() with children', () => {
-    const root = ecs.createEntity([RenderableComponent, ChildrenComponent]);
-    const a = ecs.createEntity([RenderableComponent, ChildrenComponent]);
-    const b = ecs.createEntity([ChildrenComponent]);
+    const root = ecs.createEntity([Renderable, Children]);
+    const a = ecs.createEntity([Renderable, Children]);
+    const b = ecs.createEntity([Children]);
 
     const aSpy = sinon.spy();
     const bSpy = sinon.spy();
