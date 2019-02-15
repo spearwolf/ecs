@@ -3,8 +3,8 @@
 /* eslint no-console: 0 */
 import { assert } from 'chai';
 
-import getComponentName from './getComponentName';
-import { Children } from './components';
+import getComponentName from '../getComponentName';
+import { Children } from '../../components';
 
 describe('getComponentName', () => {
   describe('component constructor', () => {

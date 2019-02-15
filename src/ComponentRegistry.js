@@ -1,4 +1,4 @@
-import getComponentName from './getComponentName';
+import getComponentName from './utils/getComponentName';
 
 export default class ComponentRegistry {
 

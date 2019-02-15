@@ -4,12 +4,12 @@
 import { assert } from 'chai';
 import sinon from 'sinon';
 
-import ECS from '../ECS';
+import ECS from '../../ECS';
 
 import {
   Children,
   Renderable,
-} from '.';
+} from '..';
 
 describe('Renderable', () => {
 

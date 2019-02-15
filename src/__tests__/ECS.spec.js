@@ -4,7 +4,7 @@
 
 import { assert } from 'chai';
 
-import ECS from './ECS';
+import ECS from '../ECS';
 
 describe('ECS', () => {
   it('new ECS()', () => {

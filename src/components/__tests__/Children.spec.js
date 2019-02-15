@@ -3,8 +3,8 @@
 /* eslint no-console: 0 */
 import { assert } from 'chai';
 
-import ECS from '../ECS';
-import Children from './Children';
+import ECS from '../../ECS';
+import Children from '../Children';
 
 describe('Children', () => {
   const ecs = new ECS();

@@ -1,7 +1,7 @@
 import eventize from '@spearwolf/eventize';
 
-import uuid from './uuid';
-import getComponentName from './getComponentName';
+import uuid from './utils/uuid';
+import getComponentName from './utils/getComponentName';
 
 const hasComponent = entity => name => entity.components.has(getComponentName(name));
 
