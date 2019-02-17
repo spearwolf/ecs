@@ -5,14 +5,14 @@ class EntityComponent {
     this.entity = entity;
   }
 
-  // connectEntity(entity) { called by Entity }
+  // connectEntity(entity)
 
-  // disconnectEntity(entity) { called by Entity }
+  // disconnectEntity(entity)
 
-  // update(data) { called by ComponentFactory }
+  // update(data) <= ComponentFactory.updateComponent()
 
-  // destroy() { called by ComponentFactory }
- 
+  // destroy()
+
 }
 
 export { EntityComponent };

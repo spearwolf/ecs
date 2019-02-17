@@ -6,10 +6,10 @@ export default class ComponentRegistry {
   factories = new Map();
 
   /**
-   * @param {string} name - component factory name
+   * @param {string|object} componentClassOrName - component class or factory name
    */
-  getComponentFactory(name) {
-    const componentName = getComponentName(name);
+  getComponentFactory(componentClassOrName) {
+    const componentName = getComponentName(componentClassOrName);
     const factory = this.factories.get(componentName);
     if (!factory) {
       return warn(`[ComponentRegistry] unknown component-factory: '${componentName}'`);
@@ -44,22 +44,11 @@ export default class ComponentRegistry {
     entity.setComponent(componentName, component);
   }
 
-  updateComponent(entity, componentClassOrName, data) {
-    const componentName = getComponentName(componentClassOrName);
-    const factory = this.getComponentFactory(componentName);
-    const component = entity[componentName];
-    factory.update(component, data);
-  }
-
-  createOrUpdateComponent(entity, componentClassOrName, data) {
-    const componentName = getComponentName(componentClassOrName);
-    this[entity.hasComponent(componentName) ? 'updateComponent' : 'createComponent'](entity, componentName, data);
-  }
-
   destroyComponent(componentClassOrName, component) {
     const factory = this.factories.get(getComponentName(componentClassOrName));
     if (factory && factory.destroy) {
       factory.destroy(component);
     }
   }
+
 }

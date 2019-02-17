@@ -1,4 +1,4 @@
-import ComponentFactory from './ComponentFactory';
+import ComponentFactory from './factories/ComponentFactory';
 
 /**
  * A component decorator.
