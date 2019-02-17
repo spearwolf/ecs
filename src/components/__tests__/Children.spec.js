@@ -8,13 +8,12 @@ import Children from '../Children';
 
 describe('Children', () => {
   const ecs = new ECS();
+
   let entity;
   let entity2;
 
   it('ECS#registerComponent()', () => {
-    // const factory = new ComponentFactory(Children);
-    // ecs.registerComponent(factory);
-    ecs.registerComponent(Children);
+    ecs.registerComponents(Children);
     assert.strictEqual(ecs.getComponentFactory(Children), Children.componentFactory);
   });
 

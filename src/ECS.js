@@ -1,6 +1,8 @@
 import Entity from './Entity';
 import ComponentRegistry from './ComponentRegistry';
 
+import warn from './utils/warn';
+
 export default class ECS extends ComponentRegistry {
 
   constructor(components) {
@@ -8,7 +10,7 @@ export default class ECS extends ComponentRegistry {
     this.entities = new Map();
 
     if (Array.isArray(components) && components.length) {
-      this.registerComponent(...components);
+      this.registerComponents(...components);
     }
   }
 
@@ -21,15 +23,15 @@ export default class ECS extends ComponentRegistry {
     const entity = new Entity(this, id);
 
     if (this.entities.has(entity.id)) {
-      throw new Error(`ECS: duplicate entity.id='${entity.id}' are not allowed`);
+      return warn(`[ECS.createEntity] entity with id:${entity.id} already exists! entity id's must be unique!`);
     }
 
     this.entities.set(entity.id, entity);
 
     if (Array.isArray(components)) {
       components.forEach((componentClass) => {
-        if (Array.isArray(componentClass)) { // c => [componentClass, data]
-          this.createComponent(entity, ...componentClass);
+        if (Array.isArray(componentClass)) {
+          this.createComponent(entity, ...componentClass); // c => [componentClass, data]
         } else {
           this.createComponent(entity, componentClass);
         }

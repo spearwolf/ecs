@@ -17,7 +17,7 @@ export default class ComponentRegistry {
   /**
    * @param {...object} components
    */
-  registerComponent(...components) {
+  registerComponents(...components) {
     components.forEach(({ componentName, componentFactory }) => {
       this.factories.set(componentName, componentFactory);
     })
