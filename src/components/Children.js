@@ -14,8 +14,10 @@ class Children {
 
   constructor(entity, options) {
     this.entity = entity;
-    this.parent = options && options.parent;
+
     this.children = [];
+
+    this.setParent(options && options.parent);
   }
 
   forEach(callback, hasComponents) {
