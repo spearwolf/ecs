@@ -7,15 +7,46 @@ An _entity component system_ library for javascript.
 ```js
 
 @Component({
-  name: 'my'
+  name: 'foo'
 })
-class MyComponent {
+class Foo {
+
+  // constructor(entity)
+  
+  onHello = () => {
+    console.log('moin moin!');
+  };
+
+  connectToEntity(entity) {
+    entity.on('hello', this.onHello);
+  }
+
+  disconnectFromEntity(entity) {
+    entity.off(this.onHello);
+  }
+
+  // destroy()
+
+}
+
+@Component({
+  name: 'bar'
+})
+class Bar {
 
   // constructor(entity)
 
-  // connectToEntity(entity)
+  hello() {
+    console.log('hej!');
+  }
 
-  // disconnectFromEntity(entity)
+  connectToEntity(entity) {
+    entity.on(this);
+  }
+
+  disconnectFromEntity(entity) {
+    entity.off(this);
+  }
 
   // destroy()
 
