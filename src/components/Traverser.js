@@ -7,20 +7,19 @@ import Children from './Children';
 })
 class Traverser {
 
-  constructor(entity, options) {
+  constructor(entity) {
     this.entity = entity;
-    this.$event = (options && options.event) || 'traverse';
   }
 
-  traverse(context) {
+  traverse(event, context) {
     const { entity } = this;
 
-    entity.emit(this.$event, context);
+    entity.emit(event, context);
 
     if (entity.hasComponent(Children)) {
 
       entity.children.forEach(
-        ({ traverser }) => traverser.traverse(context),
+        ({ traverser }) => traverser.traverse(event, context),
         Traverser,
       );
 

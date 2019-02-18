@@ -21,12 +21,12 @@ describe('Traverser', () => {
     const entity = ecs.createEntity([Traverser]);
 
     const traverseSpy = sinon.spy();
-    entity.on(entity.traverser.$event, traverseSpy);
+    entity.on('foo', traverseSpy);
 
     const ctx = {};
-    entity.traverser.traverse(ctx);
+    entity.traverser.traverse('foo', ctx);
 
-    assert.isTrue(traverseSpy.called, `event:${entity.traverser.$event} should be called`);
+    assert.isTrue(traverseSpy.called, 'event:foo should be called');
     assert.isTrue(traverseSpy.calledWith(ctx));
   });
 
@@ -35,8 +35,8 @@ describe('Traverser', () => {
 
     const event = 'fooBar';
 
-    const parent = ecs.createEntity([[Traverser, { event }], Children]);
-    const childA = ecs.createEntity([[Traverser, { event }], Children]);
+    const parent = ecs.createEntity([Traverser, Children]);
+    const childA = ecs.createEntity([Traverser, Children]);
     const childB = ecs.createEntity([Children]);
 
     childA.children.setParent(parent);
@@ -51,7 +51,7 @@ describe('Traverser', () => {
     childB.on(event, bSpy);
 
     const ctx = {};
-    parent.traverser.traverse(ctx);
+    parent.traverser.traverse(event, ctx);
 
     assert.isTrue(parentSpy.called, `event:${event} should be called on parent`);
 
