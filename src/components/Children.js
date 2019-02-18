@@ -7,6 +7,9 @@ const callIf = (hasComponents, callback) => (child) => {
   }
 };
 
+@Component({
+  name: 'children',
+})
 class Children {
 
   constructor(entity, options) {
@@ -52,4 +55,4 @@ class Children {
 
 }
 
-export default Component({ name: 'children' })(Children);
+export default Children;

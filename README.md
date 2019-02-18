@@ -6,21 +6,19 @@ An _entity component system_ library for javascript.
 
 ```js
 
-Component({
-  name: 'my',
-})(
-  
-  class MyComponent {
+@Component({
+  name: 'my'
+})
+class MyComponent {
 
-    // constructor(entity)
+  // constructor(entity)
 
-    // connectToEntity(entity)
+  // connectToEntity(entity)
 
-    // disconnectFromEntity(entity)
+  // disconnectFromEntity(entity)
 
-    // destroy()
+  // destroy()
 
-  }
-)
+}
 
 ```

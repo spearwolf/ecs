@@ -13,7 +13,8 @@ describe('Entity<>Component Lifecycle', () => {
 
     const spy = sinon.spy();
 
-    const Dummy = Component({ name: 'dummy' })(
+    const Dummy = (
+      @Component({ name: 'dummy' })
       class {
         get [Entity.$connectToEntity]() { return spy; }
       }
@@ -31,7 +32,8 @@ describe('Entity<>Component Lifecycle', () => {
 
     const spy = sinon.spy();
 
-    const Dummy = Component({ name: 'dummy' })(
+    const Dummy = (
+      @Component({ name: 'dummy' })
       class {
         get [Entity.$disconnectFromEntity]() { return spy; }
       }
@@ -53,7 +55,8 @@ describe('Entity<>Component Lifecycle', () => {
 
     const spy = sinon.spy();
 
-    const Dummy = Component({ name: 'dummy' })(
+    const Dummy = (
+      @Component({ name: 'dummy' })
       class {
         [Entity.$connectToEntity](entity) {
           entity.once(Entity.$connectComponent, spy);
@@ -73,7 +76,8 @@ describe('Entity<>Component Lifecycle', () => {
 
     const spy = sinon.spy();
 
-    const Dummy = Component({ name: 'dummy' })(
+    const Dummy = (
+      @Component({ name: 'dummy' })
       class {
         [Entity.$connectToEntity](entity) {
           entity.once(Entity.$destroyComponent, spy);

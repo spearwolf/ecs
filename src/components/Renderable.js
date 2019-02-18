@@ -2,6 +2,9 @@ import { Component } from '../Component';
 
 import Children from './Children';
 
+@Component({
+  name: 'renderable',
+})
 class Renderable {
 
   static $renderFrame = 'renderFrame';
@@ -30,4 +33,4 @@ class Renderable {
 
 }
 
-export default Component({ name: 'renderable' })(Renderable);
+export default Renderable;
