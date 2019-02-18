@@ -10,9 +10,9 @@ class MyComponent {
 
   // constructor(entity)
 
-  // connectEntity(entity)
+  // connectToEntity(entity)
 
-  // disconnectEntity(entity)
+  // disconnectFromEntity(entity)
 
   // destroy()
 

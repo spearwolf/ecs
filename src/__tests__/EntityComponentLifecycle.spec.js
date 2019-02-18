@@ -9,13 +9,13 @@ import { Component, ECS, Entity } from '..';
 
 describe('Entity<>Component Lifecycle', () => {
 
-  it('$connectEntity', () => {
+  it('$connectToEntity', () => {
 
     const spy = sinon.spy();
 
     const Dummy = Component({ name: 'dummy' })(
       class {
-        get [Entity.$connectEntity]() { return spy; }
+        get [Entity.$connectToEntity]() { return spy; }
       }
     );
 
@@ -27,13 +27,13 @@ describe('Entity<>Component Lifecycle', () => {
 
   });
 
-  it('$disconnectEntity', () => {
+  it('$disconnectFromEntity', () => {
 
     const spy = sinon.spy();
 
     const Dummy = Component({ name: 'dummy' })(
       class {
-        get [Entity.$disconnectEntity]() { return spy; }
+        get [Entity.$disconnectFromEntity]() { return spy; }
       }
     );
 
@@ -55,7 +55,7 @@ describe('Entity<>Component Lifecycle', () => {
 
     const Dummy = Component({ name: 'dummy' })(
       class {
-        [Entity.$connectEntity](entity) {
+        [Entity.$connectToEntity](entity) {
           entity.once(Entity.$connectComponent, spy);
         }
       }
@@ -75,7 +75,7 @@ describe('Entity<>Component Lifecycle', () => {
 
     const Dummy = Component({ name: 'dummy' })(
       class {
-        [Entity.$connectEntity](entity) {
+        [Entity.$connectToEntity](entity) {
           entity.once(Entity.$destroyComponent, spy);
         }
       }

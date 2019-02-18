@@ -8,9 +8,9 @@ const hasComponent = entity => name => entity.components.has(getComponentName(na
 
 export default class Entity {
 
-  static $connectEntity = 'connectEntity';
+  static $connectToEntity = 'connectToEntity';
   static $connectComponent = 'connectComponent';
-  static $disconnectEntity = 'disconnectEntity';
+  static $disconnectFromEntity = 'disconnectFromEntity';
   static $destroyComponent = 'destroyComponent';
 
   constructor(ecs, id = uuid()) {
@@ -38,8 +38,8 @@ export default class Entity {
     if (!this.components.has(name)) {
       this.components.add(name);
       this[name] = component;
-      if (component[Entity.$connectEntity]) {
-        component[Entity.$connectEntity](this);
+      if (component[Entity.$connectToEntity]) {
+        component[Entity.$connectToEntity](this);
       }
       this.emit(Entity.$connectComponent, { name, component, entity: this });
     } else if (this[name] !== component) {
@@ -53,8 +53,8 @@ export default class Entity {
 
       this.emit(Entity.$destroyComponent, { name, component, entity: this });
 
-      if (component[Entity.$disconnectEntity]) {
-        component[Entity.$disconnectEntity](this);
+      if (component[Entity.$disconnectFromEntity]) {
+        component[Entity.$disconnectFromEntity](this);
       }
 
       this.ecs.destroyComponent(name, component);
