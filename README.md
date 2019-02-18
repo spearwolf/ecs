@@ -59,14 +59,14 @@ class Bar {
 ```js
 
 // first, you need a system
-// .. and the system needs to know your components
+// .. and the system needs to know about the components
 const ecs = new ECS([ Foo, Bar ]);
 
-// then you can create an entity with your components
+// then you can create an entity and attach some components to it
 const entity = ecs.createEntity([Foo, Bar]);
 
-// as result you will get an object with 'foo' and 'bar' properties
-// both props are pointing to their components intances
+// as a result you will get an object with 'foo' and 'bar' properties
+// both properties are pointing to their component instances
 
 entity.foo // is an instance of Foo
 entity.bar // is an instance of Bar
