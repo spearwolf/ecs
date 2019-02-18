@@ -77,7 +77,7 @@ entity.id // each entity has an unique id!
 
 entity.bar.hello() // => 'hej!'
 
-entity.emit('action') // emit the event 'action'
+entity.emit('hello') // emit the event 'action'
 
 // => 'moin moin!'
 // => 'hej!'
