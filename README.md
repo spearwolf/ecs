@@ -54,7 +54,7 @@ class Bar {
 
 ```
 
-## What is an Entity and how does play together?
+## What is an Entity and how does it play together?
 
 ```js
 
