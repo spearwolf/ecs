@@ -1,5 +1,4 @@
 import { Component } from '../Component';
-import { EntityComponent } from '../EntityComponent';
 
 const callIf = (hasComponents, callback) => (child) => {
   if (child.hasComponent(hasComponents)) {
@@ -8,10 +7,10 @@ const callIf = (hasComponents, callback) => (child) => {
   }
 };
 
-class Children extends EntityComponent {
+class Children {
 
   constructor(entity, options) {
-    super(entity);
+    this.entity = entity;
     this.parent = options && options.parent;
     this.children = [];
   }

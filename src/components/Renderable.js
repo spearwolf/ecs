@@ -1,15 +1,17 @@
 import { Component } from '../Component';
-import { EntityComponent } from '../EntityComponent';
 
 import Children from './Children';
 
-class Renderable extends EntityComponent {
+class Renderable {
 
   static $renderFrame = 'renderFrame';
   static $postRenderFrame = 'postRenderFrame';
 
-  renderFrame(renderer) {
+  constructor(entity) {
+    this.entity = entity;
+  }
 
+  renderFrame(renderer) {
     const { entity } = this;
 
     entity.emit(Renderable.$renderFrame, renderer);
@@ -24,7 +26,6 @@ class Renderable extends EntityComponent {
     }
 
     entity.emit(Renderable.$postRenderFrame, renderer);
-
   }
 
 }
