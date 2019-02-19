@@ -1,12 +1,5 @@
 import { Component } from '../Component';
 
-const callIf = (hasComponents, callback) => (child) => {
-  if (child.hasComponent(hasComponents)) {
-    // eslint-disable-next-line callback-return
-    callback(child);
-  }
-};
-
 @Component({
   name: 'children',
 })
@@ -14,15 +7,18 @@ class Children {
 
   constructor(entity, options) {
     this.entity = entity;
-
     this.children = [];
-
     this.setParent(options && options.parent);
   }
 
   forEach(callback, hasComponents) {
     if (hasComponents) {
-      this.children.forEach(callIf(hasComponents, callback));
+      this.children.forEach((child) => {
+        if (child.hasComponent(hasComponents)) {
+          // eslint-disable-next-line callback-return
+          callback(child);
+        }
+      });
     } else {
       this.children.forEach(callback);
     }
