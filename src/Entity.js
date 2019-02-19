@@ -18,6 +18,7 @@ export default class Entity {
     Object.defineProperties(this, {
       ecs: { value: ecs },
       components: { value: new Set() },
+      // getEntity: { value: ecs.getEntity },
     });
     eventize(this);
   }

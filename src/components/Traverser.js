@@ -7,12 +7,8 @@ import Children from './Children';
 })
 class Traverser {
 
-  constructor(entity) {
-    this.entity = entity;
-  }
-
   traverse(event, context) {
-    const { entity } = this;
+    const entity = this.getEntity();
 
     entity.emit(event, context);
 

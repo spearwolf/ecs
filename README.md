@@ -30,7 +30,7 @@ class Foo {
 })
 class Bar {
 
-  constructor(entity, message) {
+  initialize(message) {
     this.message = message;
   }
 

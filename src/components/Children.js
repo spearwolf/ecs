@@ -5,15 +5,16 @@ import { Component } from '../Component';
 })
 class Children {
 
-  constructor(entity, options) {
-    this.entity = entity;
-    this.children = [];
-    this.setParent(options && options.parent);
+  children = [];
+  parent = undefined;
+
+  initialize({ parent }) {
+    this.setParent(parent);
   }
 
   forEach(callback, hasComponents) {
     this.children.forEach((childId) => {
-      const child = this.entity.ecs.getEntity(childId);
+      const child = this.getEntity(childId);
       if (child) {
         if (hasComponents) {
           if (child.hasComponent(hasComponents)) {
@@ -30,18 +31,20 @@ class Children {
     const prevParentId = this.parent;
     this.parent = parentId;
 
+    const { id } = this.getEntity();
+
     if (prevParentId) {
-      const prevParent = this.entity.ecs.getEntity(prevParentId);
+      const prevParent = this.getEntity(prevParentId);
       if (prevParent && prevParent.hasComponent(Children)) {
-        prevParent.children.removeChild(this.entity.id);
+        prevParent.children.removeChild(id);
       }
     }
 
-    const parent = this.entity.ecs.getEntity(parentId);
+    const parent = this.getEntity(parentId);
 
     if (parent && parent.hasComponent(Children)) {
-      if (!parent.children.hasChild(this.entity.id)) {
-        parent.children.children.push(this.entity.id);
+      if (!parent.children.hasChild(id)) {
+        parent.children.children.push(id);
       }
     }
   }
@@ -56,7 +59,7 @@ class Children {
       this.children.splice(idx, 1);
     }
 
-    const child = this.entity.ecs.getEntity(childId);
+    const child = this.getEntity(childId);
     if (child.hasComponent(Children)) {
       child.children.setParent(undefined);
     }
