@@ -73,8 +73,6 @@ describe('Entity.toJSON', () => {
     entity1.children.setParent(entity.id);
     entity.children.addChild(entity2.id);
 
-    console.log(JSON.stringify(entity.toJSON(), null, 4));
-
     expect(entity.toJSON()).toEqual([
       entity.id, {
         foo: {},
