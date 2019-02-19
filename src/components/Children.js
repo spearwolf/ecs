@@ -15,8 +15,7 @@ class Children {
     if (hasComponents) {
       this.children.forEach((child) => {
         if (child.hasComponent(hasComponents)) {
-          // eslint-disable-next-line callback-return
-          callback(child);
+          callback(child); // eslint-disable-line callback-return
         }
       });
     } else {
