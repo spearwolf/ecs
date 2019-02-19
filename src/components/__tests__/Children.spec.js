@@ -2,6 +2,7 @@
 /* eslint-env mocha */
 /* eslint no-console: 0 */
 import { assert } from 'chai';
+import sinon from 'sinon';
 
 import ECS from '../../ECS';
 import Children from '../Children';
@@ -47,5 +48,49 @@ describe('Children', () => {
   it('removeChild()', () => {
     entity2.children.removeChild(entity.id);
     assert.isFalse(entity2.children.hasChild(entity.id));
+  });
+
+  it('traverse()', () => {
+    const ecs = new ECS([Children]);
+    const entity = ecs.createEntity([Children]);
+
+    const traverseSpy = sinon.spy();
+    entity.on('foo', traverseSpy);
+
+    const ctx = {};
+    entity.children.traverse('foo', ctx);
+
+    assert.isTrue(traverseSpy.called, 'event:foo should be called');
+    assert.isTrue(traverseSpy.calledWith(ctx));
+  });
+
+  it('traverse() with children', () => {
+    const ecs = new ECS([Children]);
+
+    const event = 'fooBar';
+
+    const parent = ecs.createEntity([Children]);
+    const childA = ecs.createEntity([[Children, { parent: parent.id }]]);
+    const childB = ecs.createEntity();
+
+    const parentSpy = sinon.spy();
+    const aSpy = sinon.spy();
+    const bSpy = sinon.spy();
+
+    parent.on(event, parentSpy);
+    childA.on(event, aSpy);
+    childB.on(event, bSpy);
+
+    parent.children.addChild(childB.id);
+
+    const ctx = {};
+    parent.children.traverse(event, ctx);
+
+    assert.isTrue(parentSpy.called, `event:${event} should be called on parent`);
+
+    assert.isTrue(aSpy.called, `event:${event} should be called on child with traverser`);
+    assert.isTrue(aSpy.calledWith(ctx));
+
+    assert.isTrue(bSpy.called, `event:${event} should be called on childB`);
   });
 });
