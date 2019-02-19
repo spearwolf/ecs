@@ -29,12 +29,12 @@ describe('Children', () => {
 
   it('setParent()', () => {
     entity2 = ecs.createEntity([Children]);
-    entity.children.setParent(entity2);
-    assert.strictEqual(entity.children.parent, entity2);
+    entity.children.setParent(entity2.id);
+    assert.strictEqual(entity.children.parent, entity2.id);
   });
 
   it('hasChild()', () => {
-    assert.isTrue(entity2.children.hasChild(entity));
+    assert.isTrue(entity2.children.hasChild(entity.id));
   });
 
   it('entity.hasComponent()', () => {
@@ -45,7 +45,7 @@ describe('Children', () => {
   });
 
   it('removeChild()', () => {
-    entity2.children.removeChild(entity);
-    assert.isFalse(entity2.children.hasChild(entity));
+    entity2.children.removeChild(entity.id);
+    assert.isFalse(entity2.children.hasChild(entity.id));
   });
 });

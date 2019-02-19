@@ -36,8 +36,8 @@ describe('Traverser', () => {
     const event = 'fooBar';
 
     const parent = ecs.createEntity([Traverser, Children]);
-    const childA = ecs.createEntity([Traverser, [Children, { parent }]]);
-    const childB = ecs.createEntity([[Children, { parent }]]);
+    const childA = ecs.createEntity([Traverser, [Children, { parent: parent.id }]]);
+    const childB = ecs.createEntity([[Children, { parent: parent.id }]]);
 
     const parentSpy = sinon.spy();
     const aSpy = sinon.spy();

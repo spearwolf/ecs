@@ -12,41 +12,53 @@ class Children {
   }
 
   forEach(callback, hasComponents) {
-    if (hasComponents) {
-      this.children.forEach((child) => {
-        if (child.hasComponent(hasComponents)) {
+    this.children.forEach((childId) => {
+      const child = this.entity.ecs.getEntity(childId);
+      if (child) {
+        if (hasComponents) {
+          if (child.hasComponent(hasComponents)) {
+            callback(child); // eslint-disable-line callback-return
+          }
+        } else {
           callback(child); // eslint-disable-line callback-return
         }
-      });
-    } else {
-      this.children.forEach(callback);
-    }
+      }
+    });
   }
 
-  setParent(parent) {
-    const prevParent = this.parent;
-    this.parent = parent;
-    if (prevParent && prevParent.hasComponent(Children)) {
-      prevParent.children.removeChild(this.entity);
+  setParent(parentId) {
+    const prevParentId = this.parent;
+    this.parent = parentId;
+
+    if (prevParentId) {
+      const prevParent = this.entity.ecs.getEntity(prevParentId);
+      if (prevParent && prevParent.hasComponent(Children)) {
+        prevParent.children.removeChild(this.entity.id);
+      }
     }
+
+    const parent = this.entity.ecs.getEntity(parentId);
+
     if (parent && parent.hasComponent(Children)) {
-      if (!parent.children.hasChild(this.entity)) {
-        parent.children.children.push(this.entity);
+      if (!parent.children.hasChild(this.entity.id)) {
+        parent.children.children.push(this.entity.id);
       }
     }
   }
 
-  hasChild(child) {
-    return this.children.indexOf(child) >= 0;
+  hasChild(childId) {
+    return this.children.indexOf(childId) >= 0;
   }
 
-  removeChild(child) {
-    const idx = this.children.indexOf(child);
+  removeChild(childId) {
+    const idx = this.children.indexOf(childId);
     if (idx >= 0) {
       this.children.splice(idx, 1);
     }
+
+    const child = this.entity.ecs.getEntity(childId);
     if (child.hasComponent(Children)) {
-      child.children.setParent(null);
+      child.children.setParent(undefined);
     }
   }
 

@@ -7,6 +7,7 @@ export default class ECS extends ComponentRegistry {
 
   constructor(components) {
     super();
+
     this.entities = new Map();
 
     if (Array.isArray(components) && components.length) {
