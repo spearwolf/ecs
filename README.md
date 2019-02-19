@@ -1,6 +1,6 @@
 # `@spearwolf/ecs`
 
-An _entity component system_ library for javascript.
+An [entity component system](https://en.wikipedia.org/wiki/Entity_component_system) for javascript.
 
 ## What is a Component?
 
