@@ -2,7 +2,7 @@
 
 An [entity component system](https://en.wikipedia.org/wiki/Entity_component_system) for javascript.
 
-## What is a Component?
+## What does a Component look like?
 
 ```js
 
@@ -11,21 +11,17 @@ An [entity component system](https://en.wikipedia.org/wiki/Entity_component_syst
 })
 class Foo {
 
-  // constructor(entity)
-  
-  onHello = () => {
+  hello() => {
     console.log('moin moin!');
   };
 
   connectToEntity(entity) {
-    entity.on('hello', this.onHello);
+    entity.on('hello', this);
   }
 
   disconnectFromEntity(entity) {
-    entity.off(this.onHello);
+    entity.off(this);
   }
-
-  // destroy()
 
 }
 
@@ -34,18 +30,20 @@ class Foo {
 })
 class Bar {
 
-  // constructor(entity)
+  constructor(entity, message) {
+    this.message = message;
+  }
 
-  hello() {
-    console.log('hej!');
+  sayHello = () => {
+    console.log(this.message);
   }
 
   connectToEntity(entity) {
-    entity.on(this);
+    entity.on('hello', this.sayHello);
   }
 
   disconnectFromEntity(entity) {
-    entity.off(this);
+    entity.off(this.sayHello);
   }
 
   // destroy()
@@ -58,12 +56,15 @@ class Bar {
 
 ```js
 
-// first, you need a system
-// .. and the system needs to know about the components
+// first, you need an entrypoint
+// .. where you can register your components
 const ecs = new ECS([ Foo, Bar ]);
 
 // then you can create an entity and attach some components to it
-const entity = ecs.createEntity([Foo, Bar]);
+const entity = ecs.createEntity([
+  Foo,
+  [Bar, "hej!"], // our Bar component needs some configuration
+]);
 
 // as a result you will get an object with 'foo' and 'bar' properties
 // both properties are pointing to their component instances
@@ -75,7 +76,7 @@ entity.id // each entity has an unique id!
 
 // now we can play with our entity ..
 
-entity.bar.hello() // => 'hej!'
+entity.bar.sayHello() // => 'hej!'
 
 entity.emit('hello') // emit the event 'action'
 
