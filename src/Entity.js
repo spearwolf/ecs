@@ -6,19 +6,39 @@ import warn from './utils/warn';
 
 const hasComponent = entity => name => entity.components.has(getComponentName(name));
 
+const toJSON = (obj) => {
+  if (obj == null) {
+    return obj;
+  }
+  const out = {};
+  const keys = Object.keys(obj);
+  keys.forEach((key) => {
+    const val = obj[key];
+    switch (typeof val) {
+      case 'number':
+      case 'bigint':
+      case 'string':
+      case 'boolean':
+      case 'object':
+        out[key] = val;
+    }
+  });
+  return out;
+};
+
 export default class Entity {
 
   static $connectToEntity = 'connectToEntity';
   static $connectComponent = 'connectComponent';
   static $disconnectFromEntity = 'disconnectFromEntity';
   static $destroyComponent = 'destroyComponent';
+  static $toJSON = 'toJSON';
 
   constructor(ecs, id = uuid()) {
     this.id = id;
     Object.defineProperties(this, {
       ecs: { value: ecs },
       components: { value: new Set() },
-      // getEntity: { value: ecs.getEntity },
     });
     eventize(this);
   }
@@ -62,6 +82,19 @@ export default class Entity {
       this.components.delete(name);
       delete this[component];
     }
+  }
+
+  toJSON() {
+    const components = Array.from(this.components);
+    if (components.length) {
+      const json = {};
+      components.forEach((name) => {
+        const component = this[name];
+        json[name] = component[Entity.$toJSON] ? component[Entity.$toJSON]() : toJSON(component);
+      });
+      return [this.id, json];
+    }
+    return this.id;
   }
 
 }

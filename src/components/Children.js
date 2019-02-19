@@ -90,6 +90,13 @@ class Children {
     }
   }
 
+  toJSON() {
+    return {
+      parent: this.parent || null,
+      children: this.children.map(childId => this.getEntity(childId).toJSON()),
+    };
+  }
+
 }
 
 export default Children;
