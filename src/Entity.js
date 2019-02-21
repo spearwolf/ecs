@@ -3,28 +3,9 @@ import eventize from '@spearwolf/eventize';
 import uuid from './utils/uuid';
 import getComponentName from './utils/getComponentName';
 import warn from './utils/warn';
+import { toJSON } from './utils/toJSON';
 
 const hasComponent = entity => name => entity.components.has(getComponentName(name));
-
-const toJSON = (obj) => {
-  if (obj == null) {
-    return obj;
-  }
-  const out = {};
-  const keys = Object.keys(obj);
-  keys.forEach((key) => {
-    const val = obj[key];
-    switch (typeof val) {
-      case 'number':
-      case 'bigint':
-      case 'string':
-      case 'boolean':
-      case 'object':
-        out[key] = val;
-    }
-  });
-  return out;
-};
 
 export default class Entity {
 
@@ -53,6 +34,14 @@ export default class Entity {
 
   hasComponent(name) {
     return Array.isArray(name) ? name.every(hasComponent(this)) : hasComponent(this)(name);
+  }
+
+  /**
+   * Create a new component and attach it to the entity.
+   * @see ECS#createComponent()
+   */
+  createComponent(componentClassOrName, data) {
+    this.ecs.createComponent(componentClassOrName, data);
   }
 
   setComponent(name, component) {
