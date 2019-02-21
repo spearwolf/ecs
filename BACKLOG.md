@@ -11,3 +11,4 @@ BACKLOG
 - [ ] `ECS`: _for each entity (with components)_
 - [ ] `ECS`: export all entites (and do NOT export recursive entities from children component)
 - [ ] create documentation for all essential features
+- [ ] `Children`: add optional [_pre_, _post_] events to `traverse(..)`
