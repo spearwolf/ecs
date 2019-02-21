@@ -1,6 +1,10 @@
 
-TODO Features v1.0
-===================
+BACKLOG
+=======
+
+## Milestone v1.0
+
+### Features
 
 - [ ] `@Component`: defaultConfig
 - [ ] `ECS`: _filter by components_
