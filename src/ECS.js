@@ -42,6 +42,17 @@ export default class ECS extends ComponentRegistry {
     return entity;
   }
 
+  buildFromJSON(entities) {
+    return entities.map((entity) => {
+      if (Array.isArray(entity)) {
+        const [id, data] = entity;
+        const components = Object.keys(data).map(name => [name, data[name]]);
+        return this.createEntity(components, id);
+      }
+      return this.createEntity(null, entity);
+    });
+  }
+
   getEntity(id) {
     return this.entities.get(id);
   }

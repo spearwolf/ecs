@@ -8,8 +8,13 @@ class Children {
   children = [];
   parent = undefined;
 
-  initialize({ parent }) {
+  initialize({ parent, children }) {
     this.setParent(parent);
+
+    if (Array.isArray(children)) {
+      this.getEntity().ecs.buildFromJSON(children);
+      this.children = children.map(child => Array.isArray(child) ? child[0] : child);
+    }
   }
 
   forEach(callback, hasComponents) {
