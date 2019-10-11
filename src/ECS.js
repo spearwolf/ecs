@@ -3,6 +3,11 @@ import ComponentRegistry from './ComponentRegistry';
 
 import warn from './utils/warn';
 
+/**
+ * @typedef {Array<string, Object>} EntityDescriptor
+ * @property {string} name
+ */
+
 export default class ECS extends ComponentRegistry {
 
   constructor(components) {
@@ -16,15 +21,16 @@ export default class ECS extends ComponentRegistry {
   }
 
   /**
-   * @param {Array} [components] - *Optional* components to attach to the entity
-   * @param {string} [id] - The *optional* entity id
+   * @param {Array} [components] components to attach to the entity
+   * @param {string} [id] entity id
    * @returns {Entity}
    */
   createEntity(components, id) {
     const entity = new Entity(this, id);
 
     if (this.entities.has(entity.id)) {
-      return warn(`[ECS.createEntity] entity with id:${entity.id} already exists! entity id's must be unique!`);
+      warn(`[ECS.createEntity] entity with id:${entity.id} already exists! entity id's must be unique!`);
+      return;
     }
 
     this.entities.set(entity.id, entity);
@@ -42,6 +48,10 @@ export default class ECS extends ComponentRegistry {
     return entity;
   }
 
+  /**
+   * @param {Array<EntityDescriptor>} entities 
+   * @returns {Array<Entity>}
+   */
   buildFromJSON(entities) {
     return entities.map((entity) => {
       if (Array.isArray(entity)) {
