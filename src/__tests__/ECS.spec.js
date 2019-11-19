@@ -5,6 +5,7 @@
 import { assert } from 'chai';
 
 import ECS from '../ECS';
+import { $entityIsDestroyed } from '../constants';
 
 describe('ECS', () => {
   it('new ECS()', () => {
@@ -30,7 +31,7 @@ describe('ECS', () => {
     const entity = ecs.createEntity();
     assert.strictEqual(ecs.getEntity(entity.id), entity);
     ecs.destroyEntity(entity.id);
-    assert.isTrue(entity.destroyed);
+    assert.isTrue(entity[$entityIsDestroyed]);
     assert.notExists(ecs.getEntity(entity.id));
   });
 });

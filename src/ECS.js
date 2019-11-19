@@ -1,7 +1,7 @@
 import Entity from './Entity';
 import ComponentRegistry from './ComponentRegistry';
-
 import warn from './utils/warn';
+import { $entityIsDestroyed } from './constants';
 
 /**
  * @typedef {Array<string, Object>} EntityDescriptor
@@ -49,7 +49,7 @@ export default class ECS extends ComponentRegistry {
   }
 
   /**
-   * @param {Array<EntityDescriptor>} entities 
+   * @param {Array<EntityDescriptor>} entities
    * @returns {Array<Entity>}
    */
   buildFromJSON(entities) {
@@ -71,7 +71,7 @@ export default class ECS extends ComponentRegistry {
     const e = this.entities.get(id);
     if (e) {
       this.entities.delete(id);
-      if (!e.destroyed) {
+      if (!e[$entityIsDestroyed]) {
         e.destroy();
       }
     }

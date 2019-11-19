@@ -2,7 +2,7 @@ import ComponentFactory from './factories/ComponentFactory';
 
 /**
  * A component decorator.
- * 
+ *
  * @param {object} options
  * @param {string} options.name - component name
  * @param {function} [options.factory] - component factory. default is [ComponentFactory]

@@ -4,6 +4,7 @@ import uuid from './utils/uuid';
 import getComponentName from './utils/getComponentName';
 import warn from './utils/warn';
 import { toJSON } from './utils/toJSON';
+import { $entityIsDestroyed } from './constants';
 
 const hasComponent = entity => name => entity.components.has(getComponentName(name));
 
@@ -25,8 +26,8 @@ export default class Entity {
   }
 
   destroy() {
-    if (!this.destroyed) {
-      this.destroyed = true;
+    if (!this[$entityIsDestroyed]) {
+      this[$entityIsDestroyed] = true;
       this.components.forEach(this.destroyComponent.bind(this));
       this.ecs.destroyEntity(this.id);
     }
