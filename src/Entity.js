@@ -4,9 +4,9 @@ import uuid from './utils/uuid';
 import getComponentName from './utils/getComponentName';
 import warn from './utils/warn';
 import { toJSON } from './utils/toJSON';
-import { $entityIsDestroyed } from './constants';
+import { $entityIsDestroyed, $components } from './constants';
 
-const hasComponent = entity => name => entity.components.has(getComponentName(name));
+const hasComponent = entity => name => entity[$components].has(getComponentName(name));
 
 export default class Entity {
 
@@ -17,14 +17,13 @@ export default class Entity {
   static $destroyComponent = 'destroyComponent';
   static $toJSON = 'toJSON';
 
-  // TODO @GetComponent annotation, eg. @GetComponent() foo: Foo
+  // TODO @GetComponent annotations - eg. @GetComponent(Children[, initialConfig]) foo: IChildren
 
   constructor(ecs, id = uuid()) {
     this.id = id;
     Object.defineProperties(this, {
       ecs: { value: ecs },
-      // TODO use Symbol('components'):
-      components: { value: new Set() },
+      [$components]: { value: new Set() },
     });
     eventize(this);
   }
@@ -32,7 +31,7 @@ export default class Entity {
   destroy() {
     if (!this[$entityIsDestroyed]) {
       this[$entityIsDestroyed] = true;
-      this.components.forEach(this.destroyComponent.bind(this));
+      this[$components].forEach(this.destroyComponent.bind(this));
       this.ecs.destroyEntity(this.id);
     }
   }
@@ -51,8 +50,9 @@ export default class Entity {
   }
 
   setComponent(name, component) {
-    if (!this.components.has(name)) {
-      this.components.add(name);
+    const components = this[$components];
+    if (!components.has(name)) {
+      components.add(name);
       this[name] = component;
       if (component[Entity.$connectToEntity]) {
         component[Entity.$connectToEntity](this);
@@ -65,7 +65,8 @@ export default class Entity {
 
   // TODO rename to deleteComponent
   destroyComponent(name) {
-    if (this.components.has(name)) {
+    const components = this[$components];
+    if (components.has(name)) {
       const component = this[name];
 
       this.emit(Entity.$destroyComponent, { name, component, entity: this });
@@ -75,13 +76,13 @@ export default class Entity {
       }
 
       this.ecs.destroyComponent(name, component);
-      this.components.delete(name);
+      components.delete(name);
       delete this[component];
     }
   }
 
   toJSON() {
-    const components = Array.from(this.components);
+    const components = Array.from(this[$components]);
     if (components.length) {
       const json = {};
       components.forEach((name) => {
