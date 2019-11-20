@@ -43,7 +43,7 @@
     "@babel/helpers" "^7.2.0"
     "@babel/parser" "^7.2.2"
     "@babel/template" "^7.2.2"
-    "@babel/traverse" "^7.2.2"
+    "@babel/deepEmit" "^7.2.2"
     "@babel/types" "^7.2.2"
     convert-source-map "^1.1.0"
     debug "^4.1.0"
@@ -63,7 +63,7 @@
     "@babel/helpers" "^7.6.2"
     "@babel/parser" "^7.6.4"
     "@babel/template" "^7.6.0"
-    "@babel/traverse" "^7.6.3"
+    "@babel/deepEmit" "^7.6.3"
     "@babel/types" "^7.6.3"
     convert-source-map "^1.1.0"
     debug "^4.1.0"
@@ -115,7 +115,7 @@
   integrity sha512-l79boDFJ8S1c5hvQvG+rc+wHw6IuH7YldmRKsYtpbawsxURu/paVy57FZMomGK22/JckepaikOkY0MoAmdyOlQ==
   dependencies:
     "@babel/helper-hoist-variables" "^7.4.4"
-    "@babel/traverse" "^7.4.4"
+    "@babel/deepEmit" "^7.4.4"
     "@babel/types" "^7.4.4"
 
 "@babel/helper-create-class-features-plugin@^7.5.5", "@babel/helper-create-class-features-plugin@^7.6.0":
@@ -144,7 +144,7 @@
   resolved "https://registry.yarnpkg.com/@babel/helper-explode-assignable-expression/-/helper-explode-assignable-expression-7.1.0.tgz#537fa13f6f1674df745b0c00ec8fe4e99681c8f6"
   integrity sha512-NRQpfHrJ1msCHtKjbzs9YcMmJZOg6mQMmGRB+hbamEdG5PNpaSm95275VD92DvJKuyl0s2sFiDmMZ+EnnvufqA==
   dependencies:
-    "@babel/traverse" "^7.1.0"
+    "@babel/deepEmit" "^7.1.0"
     "@babel/types" "^7.0.0"
 
 "@babel/helper-function-name@^7.1.0":
@@ -242,7 +242,7 @@
     "@babel/helper-annotate-as-pure" "^7.0.0"
     "@babel/helper-wrap-function" "^7.1.0"
     "@babel/template" "^7.1.0"
-    "@babel/traverse" "^7.1.0"
+    "@babel/deepEmit" "^7.1.0"
     "@babel/types" "^7.0.0"
 
 "@babel/helper-replace-supers@^7.5.5":
@@ -252,7 +252,7 @@
   dependencies:
     "@babel/helper-member-expression-to-functions" "^7.5.5"
     "@babel/helper-optimise-call-expression" "^7.0.0"
-    "@babel/traverse" "^7.5.5"
+    "@babel/deepEmit" "^7.5.5"
     "@babel/types" "^7.5.5"
 
 "@babel/helper-simple-access@^7.1.0":
@@ -284,7 +284,7 @@
   dependencies:
     "@babel/helper-function-name" "^7.1.0"
     "@babel/template" "^7.1.0"
-    "@babel/traverse" "^7.1.0"
+    "@babel/deepEmit" "^7.1.0"
     "@babel/types" "^7.2.0"
 
 "@babel/helpers@^7.2.0":
@@ -293,7 +293,7 @@
   integrity sha512-Q82R3jKsVpUV99mgX50gOPCWwco9Ec5Iln/8Vyu4osNIOQgSrd9RFrQeUvmvddFNoLwMyOUWU+5ckioEKpDoGA==
   dependencies:
     "@babel/template" "^7.1.2"
-    "@babel/traverse" "^7.1.5"
+    "@babel/deepEmit" "^7.1.5"
     "@babel/types" "^7.3.0"
 
 "@babel/helpers@^7.6.2":
@@ -302,7 +302,7 @@
   integrity sha512-3/bAUL8zZxYs1cdX2ilEE0WobqbCmKWr/889lf2SS0PpDcpEIY8pb1CCyz0pEcX3pEb+MCbks1jIokz2xLtGTA==
   dependencies:
     "@babel/template" "^7.6.0"
-    "@babel/traverse" "^7.6.2"
+    "@babel/deepEmit" "^7.6.2"
     "@babel/types" "^7.6.0"
 
 "@babel/highlight@^7.0.0":
@@ -761,9 +761,9 @@
     "@babel/parser" "^7.6.0"
     "@babel/types" "^7.6.0"
 
-"@babel/traverse@^7.0.0", "@babel/traverse@^7.1.0", "@babel/traverse@^7.1.5", "@babel/traverse@^7.2.2":
+"@babel/deepEmit@^7.0.0", "@babel/deepEmit@^7.1.0", "@babel/deepEmit@^7.1.5", "@babel/deepEmit@^7.2.2":
   version "7.2.3"
-  resolved "https://registry.yarnpkg.com/@babel/traverse/-/traverse-7.2.3.tgz#7ff50cefa9c7c0bd2d81231fdac122f3957748d8"
+  resolved "https://registry.yarnpkg.com/@babel/deepEmit/-/deepEmit-7.2.3.tgz#7ff50cefa9c7c0bd2d81231fdac122f3957748d8"
   integrity sha512-Z31oUD/fJvEWVR0lNZtfgvVt512ForCTNKYcJBGbPb1QZfve4WGH8Wsy7+Mev33/45fhP/hwQtvgusNdcCMgSw==
   dependencies:
     "@babel/code-frame" "^7.0.0"
@@ -776,9 +776,9 @@
     globals "^11.1.0"
     lodash "^4.17.10"
 
-"@babel/traverse@^7.4.4", "@babel/traverse@^7.5.5", "@babel/traverse@^7.6.2", "@babel/traverse@^7.6.3":
+"@babel/deepEmit@^7.4.4", "@babel/deepEmit@^7.5.5", "@babel/deepEmit@^7.6.2", "@babel/deepEmit@^7.6.3":
   version "7.6.3"
-  resolved "https://registry.yarnpkg.com/@babel/traverse/-/traverse-7.6.3.tgz#66d7dba146b086703c0fb10dd588b7364cec47f9"
+  resolved "https://registry.yarnpkg.com/@babel/deepEmit/-/deepEmit-7.6.3.tgz#66d7dba146b086703c0fb10dd588b7364cec47f9"
   integrity sha512-unn7P4LGsijIxaAJo/wpoU11zN+2IaClkQAxcJWBNCMS6cmVh802IyLHNkAjQ0iYnRS3nnxk5O3fuXW28IMxTw==
   dependencies:
     "@babel/code-frame" "^7.5.5"
@@ -1015,7 +1015,7 @@
     "@babel/types" "^7.0.0"
     "@types/babel__generator" "*"
     "@types/babel__template" "*"
-    "@types/babel__traverse" "*"
+    "@types/babel__deepEmit" "*"
 
 "@types/babel__generator@*":
   version "7.6.0"
@@ -1032,9 +1032,9 @@
     "@babel/parser" "^7.1.0"
     "@babel/types" "^7.0.0"
 
-"@types/babel__traverse@*", "@types/babel__traverse@^7.0.6":
+"@types/babel__deepEmit@*", "@types/babel__deepEmit@^7.0.6":
   version "7.0.7"
-  resolved "https://registry.yarnpkg.com/@types/babel__traverse/-/babel__traverse-7.0.7.tgz#2496e9ff56196cc1429c72034e07eab6121b6f3f"
+  resolved "https://registry.yarnpkg.com/@types/babel__deepEmit/-/babel__deepEmit-7.0.7.tgz#2496e9ff56196cc1429c72034e07eab6121b6f3f"
   integrity sha512-CeBpmX1J8kWLcDEnI3Cl2Eo6RfbGvzUctA+CjZUhOKDFbLfcr7fc4usEqLNWetrlJd7RhAkyYe2czXop4fICpw==
   dependencies:
     "@babel/types" "^7.3.0"
@@ -1165,7 +1165,7 @@ ajv@^6.10.0, ajv@^6.10.2:
   dependencies:
     fast-deep-equal "^2.0.1"
     fast-json-stable-stringify "^2.0.0"
-    json-schema-traverse "^0.4.1"
+    json-schema-deepEmit "^0.4.1"
     uri-js "^4.2.2"
 
 ajv@^6.5.5:
@@ -1175,7 +1175,7 @@ ajv@^6.5.5:
   dependencies:
     fast-deep-equal "^2.0.1"
     fast-json-stable-stringify "^2.0.0"
-    json-schema-traverse "^0.4.1"
+    json-schema-deepEmit "^0.4.1"
     uri-js "^4.2.2"
 
 ansi-escapes@^3.0.0, ansi-escapes@^3.2.0:
@@ -1360,7 +1360,7 @@ babel-eslint@^10.0.3:
   dependencies:
     "@babel/code-frame" "^7.0.0"
     "@babel/parser" "^7.0.0"
-    "@babel/traverse" "^7.0.0"
+    "@babel/deepEmit" "^7.0.0"
     "@babel/types" "^7.0.0"
     eslint-visitor-keys "^1.0.0"
     resolve "^1.12.0"
@@ -1399,7 +1399,7 @@ babel-plugin-jest-hoist@^24.9.0:
   resolved "https://registry.yarnpkg.com/babel-plugin-jest-hoist/-/babel-plugin-jest-hoist-24.9.0.tgz#4f837091eb407e01447c8843cbec546d0002d756"
   integrity sha512-2EMA2P8Vp7lG0RAzr4HXqtYwacfMErOuv1U3wrvxHX6rD1sV6xS3WXG3r8TRQ2r6w8OhvSdWt+z41hQNwNm3Xw==
   dependencies:
-    "@types/babel__traverse" "^7.0.6"
+    "@types/babel__deepEmit" "^7.0.6"
 
 babel-preset-jest@^24.9.0:
   version "24.9.0"
@@ -1982,7 +1982,7 @@ escodegen@^1.9.1:
   integrity sha512-IeMV45ReixHS53K/OmfKAIztN/igDHzTJUhZM3k1jMhIZWjk45SMwAtBsEXiJp3vSPmTcu6CXn7mDvFHRN66fw==
   dependencies:
     esprima "^3.1.3"
-    estraverse "^4.2.0"
+    esdeepEmit "^4.2.0"
     esutils "^2.0.2"
     optionator "^0.8.1"
   optionalDependencies:
@@ -2039,7 +2039,7 @@ eslint-scope@^4.0.0:
   integrity sha512-1G6UTDi7Jc1ELFwnR58HV4fK9OQK4S6N985f166xqXxpjU6plxFISJa2Ba9KCQuFa8RCnj/lSFJbHo7UFDBnUA==
   dependencies:
     esrecurse "^4.1.0"
-    estraverse "^4.1.1"
+    esdeepEmit "^4.1.1"
 
 eslint-scope@^5.0.0:
   version "5.0.0"
@@ -2047,7 +2047,7 @@ eslint-scope@^5.0.0:
   integrity sha512-oYrhJW7S0bxAFDvWqzvMPRm6pcgcnWc4QnofCAqRTRfQC0JcwenzGglTtsLyIuuWFfkqDG9vz67cnttSd53djw==
   dependencies:
     esrecurse "^4.1.0"
-    estraverse "^4.1.1"
+    esdeepEmit "^4.1.1"
 
 eslint-utils@^1.4.2:
   version "1.4.2"
@@ -2133,18 +2133,18 @@ esquery@^1.0.1:
   resolved "https://registry.yarnpkg.com/esquery/-/esquery-1.0.1.tgz#406c51658b1f5991a5f9b62b1dc25b00e3e5c708"
   integrity sha512-SmiyZ5zIWH9VM+SRUReLS5Q8a7GxtRdxEBVZpm98rJM7Sb+A9DVCndXfkeFUd3byderg+EbDkfnevfCwynWaNA==
   dependencies:
-    estraverse "^4.0.0"
+    esdeepEmit "^4.0.0"
 
 esrecurse@^4.1.0:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/esrecurse/-/esrecurse-4.2.1.tgz#007a3b9fdbc2b3bb87e4879ea19c92fdbd3942cf"
   integrity sha512-64RBB++fIOAXPw3P9cy89qfMlvZEXZkqqJkjqqXIvzP5ezRZjW+lPWjw35UX/3EhUPFYbg5ER4JYgDw4007/DQ==
   dependencies:
-    estraverse "^4.1.0"
+    esdeepEmit "^4.1.0"
 
-estraverse@^4.0.0, estraverse@^4.1.0, estraverse@^4.1.1, estraverse@^4.2.0:
+esdeepEmit@^4.0.0, esdeepEmit@^4.1.0, esdeepEmit@^4.1.1, esdeepEmit@^4.2.0:
   version "4.2.0"
-  resolved "https://registry.yarnpkg.com/estraverse/-/estraverse-4.2.0.tgz#0dee3fed31fcd469618ce7342099fc1afa0bdb13"
+  resolved "https://registry.yarnpkg.com/esdeepEmit/-/esdeepEmit-4.2.0.tgz#0dee3fed31fcd469618ce7342099fc1afa0bdb13"
   integrity sha1-De4/7TH81GlhjOc0IJn8GvoL2xM=
 
 estree-walker@^0.6.1:
@@ -2908,7 +2908,7 @@ istanbul-lib-instrument@^3.0.0, istanbul-lib-instrument@^3.0.1:
     "@babel/generator" "^7.0.0"
     "@babel/parser" "^7.0.0"
     "@babel/template" "^7.0.0"
-    "@babel/traverse" "^7.0.0"
+    "@babel/deepEmit" "^7.0.0"
     "@babel/types" "^7.0.0"
     istanbul-lib-coverage "^2.0.3"
     semver "^5.5.0"
@@ -3071,7 +3071,7 @@ jest-jasmine2@^24.9.0:
   resolved "https://registry.yarnpkg.com/jest-jasmine2/-/jest-jasmine2-24.9.0.tgz#1f7b1bd3242c1774e62acabb3646d96afc3be6a0"
   integrity sha512-Cq7vkAgaYKp+PsX+2/JbTarrk0DmNhsEtqBXNwUHkdlbrTBLtMJINADf2mf5FkowNsq8evbPc07/qFO0AdKTzw==
   dependencies:
-    "@babel/traverse" "^7.1.0"
+    "@babel/deepEmit" "^7.1.0"
     "@jest/environment" "^24.9.0"
     "@jest/test-result" "^24.9.0"
     "@jest/types" "^24.9.0"
@@ -3364,9 +3364,9 @@ json-parse-better-errors@^1.0.1:
   resolved "https://registry.yarnpkg.com/json-parse-better-errors/-/json-parse-better-errors-1.0.2.tgz#bb867cfb3450e69107c131d1c514bab3dc8bcaa9"
   integrity sha512-mrqyZKfX5EhL7hvqcV6WG1yYjnjeuYDzDhhcAAUrq8Po85NBQBJP+ZDUT75qZQ98IkUoBqdkExkukOU7Ts2wrw==
 
-json-schema-traverse@^0.4.1:
+json-schema-deepEmit@^0.4.1:
   version "0.4.1"
-  resolved "https://registry.yarnpkg.com/json-schema-traverse/-/json-schema-traverse-0.4.1.tgz#69f6a87d9513ab8bb8fe63bdb0979c448e684660"
+  resolved "https://registry.yarnpkg.com/json-schema-deepEmit/-/json-schema-deepEmit-0.4.1.tgz#69f6a87d9513ab8bb8fe63bdb0979c448e684660"
   integrity sha512-xbbCH5dCYU5T8LcEhhuh7HJ88HXuW3qsI3Y0zOZFKfZEHcpWiHU/Jxzk629Brsab/mMiHQti9wMP+845RPe3Vg==
 
 json-schema@0.2.3:

@@ -38,6 +38,7 @@ export default class ComponentRegistry {
   /**
    * Create a new component and attach it to the entity.
    */
+  // TODO rename to attachComponent
   createComponent(entity, componentClassOrName, data) {
     const componentName = getComponentName(componentClassOrName);
     const factory = this.getComponentFactory(componentName);
@@ -45,6 +46,7 @@ export default class ComponentRegistry {
     entity.setComponent(componentName, component);
   }
 
+  // TODO rename to deleteComponent
   destroyComponent(componentClassOrName, component) {
     const factory = this.factories.get(getComponentName(componentClassOrName));
     if (factory && factory.destroy) {

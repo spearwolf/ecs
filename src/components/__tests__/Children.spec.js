@@ -14,28 +14,28 @@ describe('Children', () => {
   let entity;
   let entity2;
 
-  it('ECS#registerComponent()', () => {
+  it('ecs.registerComponent()', () => {
     ecs.registerComponents(Children);
     assert.strictEqual(ecs.getComponentFactory(Children), Children[$componentFactory]);
   });
 
-  it('ECS#createEntity()', () => {
+  it('ecs.createEntity()', () => {
     entity = ecs.createEntity();
     assert.exists(entity);
   });
 
-  it('ECS#createComponent()', () => {
+  it('ecs.createComponent()', () => {
     ecs.createComponent(entity, Children);
     assert.instanceOf(entity.children, Children, 'entity.children should be an instance of Children');
   });
 
-  it('setParent()', () => {
+  it('children.setParent()', () => {
     entity2 = ecs.createEntity([Children]);
     entity.children.setParent(entity2.id);
     assert.strictEqual(entity.children.parent, entity2.id);
   });
 
-  it('hasChild()', () => {
+  it('children.hasChild()', () => {
     assert.isTrue(entity2.children.hasChild(entity.id));
   });
 
@@ -46,26 +46,26 @@ describe('Children', () => {
     assert.isTrue(entity2.hasComponent(['children']));
   });
 
-  it('removeChild()', () => {
+  it('children.removeChild()', () => {
     entity2.children.removeChild(entity.id);
     assert.isFalse(entity2.children.hasChild(entity.id));
   });
 
-  it('traverse()', () => {
+  it('children.deepEmit()', () => {
     const ecs = new ECS([Children]);
     const entity = ecs.createEntity([Children]);
 
-    const traverseSpy = sinon.spy();
-    entity.on('foo', traverseSpy);
+    const deepEmitSpy = sinon.spy();
+    entity.on('foo', deepEmitSpy);
 
     const ctx = {};
-    entity.children.traverse('foo', ctx);
+    entity.children.deepEmit('foo', ctx);
 
-    assert.isTrue(traverseSpy.called, 'event:foo should be called');
-    assert.isTrue(traverseSpy.calledWith(ctx));
+    assert.isTrue(deepEmitSpy.called, 'event:foo should be called');
+    assert.isTrue(deepEmitSpy.calledWith(ctx));
   });
 
-  it('traverse() with children', () => {
+  it('children.deepEmit() with children', () => {
     const ecs = new ECS([Children]);
 
     const event = 'fooBar';
@@ -85,13 +85,37 @@ describe('Children', () => {
     parent.children.addChild(childB.id);
 
     const ctx = {};
-    parent.children.traverse(event, ctx);
+    parent.children.deepEmit(event, ctx);
 
     assert.isTrue(parentSpy.called, `event:${event} should be called on parent`);
 
-    assert.isTrue(aSpy.called, `event:${event} should be called on child with traverser`);
+    assert.isTrue(aSpy.called, `event:${event} should be called on child with deepEmitr`);
     assert.isTrue(aSpy.calledWith(ctx));
 
     assert.isTrue(bSpy.called, `event:${event} should be called on childB`);
+  });
+
+  it('children.forEach()', () => {
+    const ecs = new ECS([Children]);
+
+    const parent = ecs.createEntity([Children]);
+    const childA = ecs.createEntity([[Children, { parent: parent.id }]]);
+    const childB = ecs.createEntity([Children]);
+    const childC = ecs.createEntity();
+
+    parent.children.addChild(childB.id);
+    parent.children.addChild(childC.id);
+
+    const ids = [];
+    parent.children.forEach((entity, idx, parentEntity) => {
+      ids.push(idx);
+      ids.push(entity.id);
+      ids.push(parentEntity.id);
+    }, Children)
+
+    assert.deepEqual(ids, [
+      0, childA.id, parent.id,
+      1, childB.id, parent.id,
+    ]);
   });
 });

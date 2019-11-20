@@ -10,16 +10,20 @@ const hasComponent = entity => name => entity.components.has(getComponentName(na
 
 export default class Entity {
 
+  // TODO use annotations: @OnConnect(ToEntity?), @OnDisconnet, @OnDestroy....
   static $connectToEntity = 'connectToEntity';
   static $connectComponent = 'connectComponent';
   static $disconnectFromEntity = 'disconnectFromEntity';
   static $destroyComponent = 'destroyComponent';
   static $toJSON = 'toJSON';
 
+  // TODO @GetComponent annotation, eg. @GetComponent() foo: Foo
+
   constructor(ecs, id = uuid()) {
     this.id = id;
     Object.defineProperties(this, {
       ecs: { value: ecs },
+      // TODO use Symbol('components'):
       components: { value: new Set() },
     });
     eventize(this);
@@ -41,6 +45,7 @@ export default class Entity {
    * Create a new component and attach it to the entity.
    * @see ECS#createComponent()
    */
+  // TODO rename to attachComponent
   createComponent(componentClassOrName, data) {
     this.ecs.createComponent(componentClassOrName, data);
   }
@@ -58,6 +63,7 @@ export default class Entity {
     }
   }
 
+  // TODO rename to deleteComponent
   destroyComponent(name) {
     if (this.components.has(name)) {
       const component = this[name];

@@ -18,28 +18,29 @@ class Children {
   }
 
   forEach(callback, hasComponents) {
-    this.children.forEach((childId) => {
+    this.children.forEach((childId, idx) => {
       const child = this.getEntity(childId);
       if (child) {
+        const entity = this.getEntity();
         if (hasComponents) {
           if (child.hasComponent(hasComponents)) {
-            callback(child); // eslint-disable-line callback-return
+            callback(child, idx, entity); // eslint-disable-line callback-return
           }
         } else {
-          callback(child); // eslint-disable-line callback-return
+          callback(child, idx, entity); // eslint-disable-line callback-return
         }
       }
     });
   }
 
-  traverse(event, context) {
+  deepEmit(event, context) {
     const entity = this.getEntity();
 
     entity.emit(event, context);
 
     entity.children.forEach((childEntity) => {
       if (childEntity.hasComponent(Children)) {
-        childEntity.children.traverse(event, context);
+        childEntity.children.deepEmit(event, context);
       } else {
         childEntity.emit(event, context);
       }
