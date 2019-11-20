@@ -1,5 +1,6 @@
 import getComponentName from './utils/getComponentName';
 import warn from './utils/warn';
+import { $componentName, $componentFactory } from './constants';
 
 export default class ComponentRegistry {
 
@@ -29,8 +30,8 @@ export default class ComponentRegistry {
    * @param {...object} components
    */
   registerComponents(...components) {
-    components.forEach(({ componentName, componentFactory }) => {
-      this.factories.set(componentName, componentFactory);
+    components.forEach(c => {
+      this.factories.set(c[$componentName], c[$componentFactory]);
     })
   }
 

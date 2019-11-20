@@ -5,15 +5,16 @@ import { assert } from 'chai';
 
 import getComponentName from '../getComponentName';
 import { Children } from '../../components';
+import { $componentName } from '../../constants';
 
 describe('getComponentName', () => {
   describe('component constructor', () => {
     it('componentName as static function', () => {
-      assert.strictEqual(getComponentName(Children), Children.componentName);
+      assert.strictEqual(getComponentName(Children), Children[$componentName]);
     });
     it('componentName as static property', () => {
       class C { }
-      C.componentName = 'foo';
+      C[$componentName] = 'foo';
       assert.strictEqual(getComponentName(C), 'foo');
     });
   });

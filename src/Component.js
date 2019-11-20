@@ -1,4 +1,5 @@
 import ComponentFactory from './factories/ComponentFactory';
+import { $componentName, $componentFactory } from './constants';
 
 /**
  * A component decorator.
@@ -19,7 +20,7 @@ const Component = ({ name, factory }) => ({ kind, elements }) => {
     elements.push({
       kind: 'field',
       placement: 'static',
-      key: 'componentName',
+      key: $componentName,
       descriptor: {
         configurable: true,
       },
@@ -27,7 +28,7 @@ const Component = ({ name, factory }) => ({ kind, elements }) => {
     }, {
       kind: 'field',
       placement: 'static',
-      key: 'componentFactory',
+      key: $componentFactory,
       descriptor: {
         configurable: true,
       },

@@ -1,3 +1,4 @@
+import { $componentName } from '../constants';
 
 export default (component) => {
   switch (typeof component) {
@@ -7,7 +8,7 @@ export default (component) => {
     case 'function':
     case 'object':
       if (component !== null) {
-        return component.componentName;
+        return component[$componentName];
       }
   }
   return undefined;

@@ -5,6 +5,7 @@ import { assert } from 'chai';
 import sinon from 'sinon';
 
 import ECS from '../../ECS';
+import { $componentFactory } from '../../constants';
 import Children from '../Children';
 
 describe('Children', () => {
@@ -15,7 +16,7 @@ describe('Children', () => {
 
   it('ECS#registerComponent()', () => {
     ecs.registerComponents(Children);
-    assert.strictEqual(ecs.getComponentFactory(Children), Children.componentFactory);
+    assert.strictEqual(ecs.getComponentFactory(Children), Children[$componentFactory]);
   });
 
   it('ECS#createEntity()', () => {
