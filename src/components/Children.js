@@ -8,6 +8,8 @@ class Children {
   children = [];
   parent = undefined;
 
+  // TODO
+  // @Initialize
   initialize({ parent, children }) {
     this.setParent(parent);
 
@@ -47,6 +49,7 @@ class Children {
     });
   }
 
+  // TODO emit events: entity->children:setParent
   setParent(parentId) {
     const prevParentId = this.parent;
     this.parent = parentId;
@@ -73,6 +76,7 @@ class Children {
     return this.children.indexOf(childId) >= 0;
   }
 
+  // TODO emit events: entity->children:addChild
   addChild(childId) {
     if (!this.hasChild(childId)) {
       const child = this.getEntity(childId);
@@ -84,6 +88,7 @@ class Children {
     }
   }
 
+  // TODO emit events: entity->children:removeChild
   removeChild(childId) {
     const idx = this.children.indexOf(childId);
     if (idx >= 0) {
