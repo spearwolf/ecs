@@ -24,9 +24,15 @@ export default {
       },
     }),
     babel({
+      exclude: [/\/core-js\//],
       presets: [[
         '@babel/preset-env', {
           debug: false,
+          useBuiltIns: 'usage',
+          corejs: {
+            version: 3,
+            proposals: true
+          },
           targets: {
             esmodules: true,
           },
