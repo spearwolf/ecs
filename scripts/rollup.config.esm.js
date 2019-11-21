@@ -24,11 +24,10 @@ export default {
       },
     }),
     babel({
-      exclude: [/\/core-js\//],
       presets: [[
         '@babel/preset-env', {
           debug: false,
-          useBuiltIns: 'usage',
+          useBuiltIns: 'entry',
           corejs: {
             version: 3,
             proposals: true

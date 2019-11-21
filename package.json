@@ -11,8 +11,8 @@
     "url": "https://github.com/spearwolf/ecs.git"
   },
   "license": "Apache-2.0",
-  "main": "dist/eventize.umd.js",
-  "module": "src/eventize.js",
+  "main": "dist/ecs.umd.js",
+  "module": "dist/ecs.mjs",
   "homepage": "https://github.com/spearwolf/ecs/",
   "bugs": {
     "url": "https://github.com/spearwolf/ecs/issues"
@@ -38,6 +38,7 @@
     "@babel/preset-typescript": "^7.7.2",
     "@spearwolf/eventize": "^0.6.6",
     "babel-eslint": "^10.0.3",
+    "babel-jest": "^24.9.0",
     "chai": "^4.2.0",
     "core-js": "3",
     "eslint": "^6.5.1",
