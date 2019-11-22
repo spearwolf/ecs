@@ -1,6 +1,6 @@
 /* eslint-env browser */
 /* eslint no-console: 0 */
 
-export default (message) => {
+export const warn = (message: any): void => {
   console.warn(message);
 };

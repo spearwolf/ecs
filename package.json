@@ -60,6 +60,13 @@
       "text",
       "json",
       "html"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "json",
+      "ts",
+      "tsx"
     ]
   },
   "peerDependencies": {

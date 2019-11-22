@@ -1,5 +1,5 @@
-import getComponentName from './utils/getComponentName';
-import warn from './utils/warn';
+import { getComponentName } from './utils/getComponentName';
+import { warn } from './utils/warn';
 import { $componentName, $componentFactory } from './constants';
 
 export default class ComponentRegistry {

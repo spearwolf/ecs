@@ -1,6 +1,6 @@
 import Entity from './Entity';
 import ComponentRegistry from './ComponentRegistry';
-import warn from './utils/warn';
+import { warn } from './utils/warn';
 import { $entityIsDestroyed } from './constants';
 
 /**

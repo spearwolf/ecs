@@ -3,7 +3,7 @@
 /* eslint no-console: 0 */
 import { assert } from 'chai';
 
-import getComponentName from '../getComponentName';
+import { getComponentName } from '../getComponentName';
 import { Children } from '../../components';
 import { $componentName } from '../../constants';
 

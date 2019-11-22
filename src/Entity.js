@@ -1,10 +1,10 @@
 import eventize from '@spearwolf/eventize';
 
-import uuid from './utils/uuid';
-import getComponentName from './utils/getComponentName';
-import warn from './utils/warn';
-import { toJSON } from './utils/toJSON';
+import { uuid } from './utils/uuid';
+import { getComponentName } from './utils/getComponentName';
+import { warn } from './utils/warn';
 import { $entityIsDestroyed, $components } from './constants';
+import { toJSON } from './utils/toJSON';
 
 const hasComponent = entity => name => entity[$components].has(getComponentName(name));
 

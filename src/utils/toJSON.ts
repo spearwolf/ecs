@@ -1,5 +1,5 @@
 
-export const toJSON = (obj) => {
+export const toJSON = (obj: Object) => {
   if (obj == null) {
     return obj;
   }

@@ -6,7 +6,7 @@ import ECS from '../ECS';
 import { Component } from '../Component';
 import { Children } from '../components';
 
-import uuid from '../utils/uuid';
+import { uuid } from '../utils/uuid';
 
 describe('ECS.createFromJSON', () => {
 
