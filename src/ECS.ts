@@ -1,16 +1,17 @@
-import Entity from './Entity';
-import ComponentRegistry from './ComponentRegistry';
+import { Entity } from './Entity';
+import { ComponentRegistry } from './ComponentRegistry';
 import { warn } from './utils/warn';
 import { $entityIsDestroyed } from './constants';
+import { ComponentClassType } from './types';
 
 /**
  * @typedef {Array<string, Object>} EntityDescriptor
  * @property {string} name
  */
 
-export default class ECS extends ComponentRegistry {
+export class ECS extends ComponentRegistry {
 
-  constructor(components) {
+  constructor(components?: ComponentClassType[]) {
     super();
 
     this.entities = new Map();
@@ -38,9 +39,9 @@ export default class ECS extends ComponentRegistry {
     if (Array.isArray(components)) {
       components.forEach((componentClass) => {
         if (Array.isArray(componentClass)) {
-          this.createComponent(entity, ...componentClass); // c => [componentClass, data]
+          this.attachComponent(entity, ...componentClass); // c => [componentClass, data]
         } else {
-          this.createComponent(entity, componentClass);
+          this.attachComponent(entity, componentClass);
         }
       });
     }

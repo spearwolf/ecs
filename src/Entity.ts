@@ -1,14 +1,18 @@
-import eventize from '@spearwolf/eventize';
+import eventize, { Eventize } from '@spearwolf/eventize';
 
 import { uuid } from './utils/uuid';
 import { getComponentName } from './utils/getComponentName';
 import { warn } from './utils/warn';
 import { $entityIsDestroyed, $components } from './constants';
 import { toJSON } from './utils/toJSON';
+import { IEntity } from './IEntity';
+import { ECS } from './ECS';
+import { ComponentNameType } from './types';
+import { IComponentInstance } from './IComponentInstance';
 
-const hasComponent = entity => name => entity[$components].has(getComponentName(name));
+export interface Entity extends Eventize {};
 
-export default class Entity {
+export class Entity implements IEntity {
 
   // TODO use annotations: @OnConnect(ToEntity?), @OnDisconnet, @OnDestroy....
   static $connectToEntity = 'connectToEntity';
@@ -17,53 +21,56 @@ export default class Entity {
   static $destroyComponent = 'destroyComponent';
   static $toJSON = 'toJSON';
 
+  readonly id: string;
+  readonly ecs: ECS;
+  
+  readonly [$components]: Set<ComponentNameType>;
+
+  [$entityIsDestroyed] = false;
+
   // TODO @GetComponent annotations - eg. @GetComponent(Children[, initialConfig]) foo: IChildren
 
-  constructor(ecs, id = uuid()) {
+  constructor(ecs: ECS, id = uuid()) {
+    this.ecs = ecs;
     this.id = id;
-    Object.defineProperties(this, {
-      ecs: { value: ecs },
-      [$components]: { value: new Set() },
-    });
+    this[$components] = new Set();
     eventize(this);
   }
 
+  isDestroyed() {
+    return this[$entityIsDestroyed];
+  }
+
   destroy() {
-    if (!this[$entityIsDestroyed]) {
+    if (!this.isDestroyed()) {
       this[$entityIsDestroyed] = true;
       this[$components].forEach(this.destroyComponent.bind(this));
       this.ecs.destroyEntity(this.id);
     }
   }
 
-  hasComponent(name) {
-    return Array.isArray(name) ? name.every(hasComponent(this)) : hasComponent(this)(name);
+  hasComponent(name: ComponentNameType) {
+    const hasComponent = (name: ComponentNameType) => this[$components].has(getComponentName(name));
+    return Array.isArray(name) ? name.every(hasComponent) : hasComponent(name);
   }
 
-  /**
-   * Create a new component and attach it to the entity.
-   * @see ECS#createComponent()
-   */
-  // TODO rename to attachComponent
-  createComponent(componentClassOrName, data) {
-    this.ecs.createComponent(componentClassOrName, data);
-  }
-
-  setComponent(name, component) {
+  setComponent(name: ComponentNameType, component: IComponentInstance) {
     const components = this[$components];
     if (!components.has(name)) {
       components.add(name);
+      // @ts-ignore
       this[name] = component;
+      // TODO extend IComponentInstance
       if (component[Entity.$connectToEntity]) {
         component[Entity.$connectToEntity](this);
       }
       this.emit(Entity.$connectComponent, { name, component, entity: this });
+      // @ts-ignore
     } else if (this[name] !== component) {
       warn(`[Entity.setComponent] can't override existing component property: '${name}'`);
     }
   }
 
-  // TODO rename to deleteComponent
   destroyComponent(name) {
     const components = this[$components];
     if (components.has(name)) {
@@ -75,7 +82,7 @@ export default class Entity {
         component[Entity.$disconnectFromEntity](this);
       }
 
-      this.ecs.destroyComponent(name, component);
+      this.ecs.deleteComponent(name, component);
       components.delete(name);
       delete this[component];
     }

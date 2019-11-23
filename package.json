@@ -36,7 +36,7 @@
     "@babel/polyfill": "^7.6.0",
     "@babel/preset-env": "^7.6.3",
     "@babel/preset-typescript": "^7.7.2",
-    "@spearwolf/eventize": "^0.6.6",
+    "@spearwolf/eventize": "spearwolf/eventize",
     "babel-eslint": "^10.0.3",
     "babel-jest": "^24.9.0",
     "chai": "^4.2.0",
@@ -70,6 +70,6 @@
     ]
   },
   "peerDependencies": {
-    "@spearwolf/eventize": "^0.6.6"
+    "@spearwolf/eventize": "spearwolf/eventize"
   }
 }

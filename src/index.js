@@ -1,6 +1,6 @@
-export { default as ECS } from './ECS';
-export { Component } from './Component';
-export { default as Entity } from './Entity';
+export * from './ECS';
+export * from './Component';
+export * from './Entity';
 
 import * as components from './components';
 import * as factories from './factories';

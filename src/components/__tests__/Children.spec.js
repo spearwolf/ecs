@@ -4,7 +4,7 @@
 import { assert } from 'chai';
 import sinon from 'sinon';
 
-import ECS from '../../ECS';
+import { ECS } from '../../ECS';
 import { $componentFactory } from '../../constants';
 import Children from '../Children';
 
@@ -24,8 +24,8 @@ describe('Children', () => {
     assert.exists(entity);
   });
 
-  it('ecs.createComponent()', () => {
-    ecs.createComponent(entity, Children);
+  it('ecs.attachComponent()', () => {
+    ecs.attachComponent(entity, Children);
     assert.instanceOf(entity.children, Children, 'entity.children should be an instance of Children');
   });
 

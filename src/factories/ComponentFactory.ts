@@ -1,6 +1,4 @@
-export interface IComponentConstructor {
-  new(): IComponentConstructor
-}
+import { IComponentConstructor } from './IComponentConstructor';
 
 export class ComponentFactory {
 
@@ -17,8 +15,7 @@ export class ComponentFactory {
     this.componentClass = componentClass;
   }
 
-  // TODO rename to attachComponent?
-  create(entity: Object, data: any) {
+  attachComponent(entity: Object, data: any) {
     const component = new this.componentClass();
     component[ComponentFactory.$getEntity] = (entityId) => entityId !== undefined ? entity.ecs.getEntity(entityId) : entity;
     if (data !== undefined && component[ComponentFactory.$initialize]) {
@@ -27,8 +24,7 @@ export class ComponentFactory {
     return component;
   }
 
-  // TODO rename to deleteComponent?
-  destroy(component: Object) {
+  deleteComponent(component: Object) {
     if (component[ComponentFactory.$destroy]) {
       component[ComponentFactory.$destroy]();
     }

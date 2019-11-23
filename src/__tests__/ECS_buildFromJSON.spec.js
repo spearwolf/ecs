@@ -2,7 +2,7 @@
 /* eslint-env jest */
 /* eslint no-console: 0 */
 
-import ECS from '../ECS';
+import { ECS } from '../ECS';
 import { Component } from '../Component';
 import { Children } from '../components';
 

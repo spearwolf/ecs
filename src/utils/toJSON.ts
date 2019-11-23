@@ -6,6 +6,7 @@ export const toJSON = (obj: Object) => {
   const out = {};
   const keys = Object.keys(obj);
   keys.forEach((key) => {
+    // @ts-ignore
     const val = obj[key];
     switch (typeof val) {
       case 'number':
@@ -13,6 +14,7 @@ export const toJSON = (obj: Object) => {
       case 'string':
       case 'boolean':
       case 'object':
+        // @ts-ignore
         out[key] = val;
     }
   });
