@@ -15,11 +15,16 @@ export interface Entity extends Eventize {};
 export class Entity implements IEntity {
 
   // TODO use annotations: @OnConnect(ToEntity?), @OnDisconnet, @OnDestroy....
-  static $connectToEntity = 'connectToEntity';
+
+  /**
+   * Connect component to entity event
+   */
   static $connectComponent = 'connectComponent';
-  static $disconnectFromEntity = 'disconnectFromEntity';
-  static $destroyComponent = 'destroyComponent';
-  static $toJSON = 'toJSON';
+
+  /**
+   * Delete component from entity event
+   */
+  static $deleteComponent = 'deleteComponent';
 
   readonly id: string;
   readonly ecs: ECS;
@@ -44,7 +49,7 @@ export class Entity implements IEntity {
   destroy() {
     if (!this.isDestroyed()) {
       this[$entityIsDestroyed] = true;
-      this[$components].forEach(this.destroyComponent.bind(this));
+      this[$components].forEach(this.deleteComponent.bind(this));
       this.ecs.destroyEntity(this.id);
     }
   }
@@ -60,9 +65,8 @@ export class Entity implements IEntity {
       components.add(name);
       // @ts-ignore
       this[name] = component;
-      // TODO extend IComponentInstance
-      if (component[Entity.$connectToEntity]) {
-        component[Entity.$connectToEntity](this);
+      if (component.connectToEntity) {
+        component.connectToEntity(this);
       }
       this.emit(Entity.$connectComponent, { name, component, entity: this });
       // @ts-ignore
@@ -71,19 +75,22 @@ export class Entity implements IEntity {
     }
   }
 
-  destroyComponent(name) {
+  deleteComponent(name: ComponentNameType) {
     const components = this[$components];
     if (components.has(name)) {
-      const component = this[name];
+      // @ts-ignore
+      const component: IComponentInstance = this[name];
 
-      this.emit(Entity.$destroyComponent, { name, component, entity: this });
+      this.emit(Entity.$deleteComponent, { name, component, entity: this });
 
-      if (component[Entity.$disconnectFromEntity]) {
-        component[Entity.$disconnectFromEntity](this);
+      if (component.disconnectFromEntity) {
+        component.disconnectFromEntity(this);
       }
 
       this.ecs.deleteComponent(name, component);
       components.delete(name);
+
+      // @ts-ignore
       delete this[component];
     }
   }
@@ -93,8 +100,10 @@ export class Entity implements IEntity {
     if (components.length) {
       const json = {};
       components.forEach((name) => {
-        const component = this[name];
-        json[name] = component[Entity.$toJSON] ? component[Entity.$toJSON]() : toJSON(component);
+        // @ts-ignore
+        const component: IComponentInstance = this[name];
+        // @ts-ignore
+        json[name] = component.toJSON ? component.toJSON() : toJSON(component);
       });
       return [this.id, json];
     }
