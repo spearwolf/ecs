@@ -1,4 +1,6 @@
 import { IComponentConstructor } from './IComponentConstructor';
+import { Entity } from '../Entity';
+import {IComponentInstance} from '../IComponentInstance';
 
 export class ComponentFactory {
 
@@ -15,19 +17,22 @@ export class ComponentFactory {
     this.componentClass = componentClass;
   }
 
-  attachComponent(entity: Object, data: any) {
-    const component = new this.componentClass();
-    component[ComponentFactory.$getEntity] = (entityId) => entityId !== undefined ? entity.ecs.getEntity(entityId) : entity;
+  attachComponent(entity: Entity, data?: any): IComponentInstance {
+    const component: any = new this.componentClass();
+    component[ComponentFactory.$getEntity] = (entityId: string) => entityId !== undefined ? entity.ecs.getEntity(entityId) : entity;
     if (data !== undefined && component[ComponentFactory.$initialize]) {
       component[ComponentFactory.$initialize](data);
     }
     return component;
   }
 
-  deleteComponent(component: Object) {
+  deleteComponent(component: IComponentInstance) {
+    // @ts-ignore
     if (component[ComponentFactory.$destroy]) {
+      // @ts-ignore
       component[ComponentFactory.$destroy]();
     }
+    // @ts-ignore
     component[ComponentFactory.$getEntity] = undefined;
   }
 
