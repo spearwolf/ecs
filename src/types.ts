@@ -8,4 +8,8 @@ export interface ComponentClassType {
   [$componentFactory]: IComponentFactory;
 }
 
-export type ComponentDescriptorType = Object | ComponentNameType;
+export type ComponentDescriptorType = ComponentClassType | ComponentNameType;
+
+export type ComponentInitializer = ComponentDescriptorType | [ComponentDescriptorType, any];
+
+export type EntityDescriptor = [string, Object] | string;

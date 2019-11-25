@@ -1,20 +1,14 @@
 import { Entity } from './Entity';
 import { ComponentRegistry } from './ComponentRegistry';
 import { warn } from './utils/warn';
-import { $entityIsDestroyed } from './constants';
-import { ComponentClassType } from './types';
-
-/**
- * @typedef {Array<string, Object>} EntityDescriptor
- * @property {string} name
- */
+import { ComponentClassType, ComponentInitializer, EntityDescriptor } from './types';
 
 export class ECS extends ComponentRegistry {
 
+  readonly entities = new Map<string, Entity>();
+
   constructor(components?: ComponentClassType[]) {
     super();
-
-    this.entities = new Map();
 
     if (Array.isArray(components) && components.length) {
       this.registerComponents(...components);
@@ -22,11 +16,11 @@ export class ECS extends ComponentRegistry {
   }
 
   /**
-   * @param {Array} [components] components to attach to the entity
-   * @param {string} [id] entity id
+   * @param components to attach to the entity
+   * @param [id] entity id
    * @returns {Entity}
    */
-  createEntity(components, id) {
+  createEntity(components: ComponentInitializer[], id?: string): Entity {
     const entity = new Entity(this, id);
 
     if (this.entities.has(entity.id)) {
@@ -53,28 +47,27 @@ export class ECS extends ComponentRegistry {
    * @param {Array<EntityDescriptor>} entities
    * @returns {Array<Entity>}
    */
-  buildFromJSON(entities) {
+  buildFromJSON(entities: EntityDescriptor[]): Entity[] {
     return entities.map((entity) => {
       if (Array.isArray(entity)) {
         const [id, data] = entity;
-        const components = Object.keys(data).map(name => [name, data[name]]);
+        // @ts-ignore
+        const components = Object.keys(data).map(name => [name, data[name]]) as ComponentInitializer[];
         return this.createEntity(components, id);
       }
       return this.createEntity(null, entity);
     });
   }
 
-  getEntity(id) {
+  getEntity(id: string) {
     return this.entities.get(id);
   }
 
-  destroyEntity(id) {
+  destroyEntity(id: string) {
     const e = this.entities.get(id);
     if (e) {
       this.entities.delete(id);
-      if (!e[$entityIsDestroyed]) {
-        e.destroy();
-      }
+      e.destroy();
     }
   }
 

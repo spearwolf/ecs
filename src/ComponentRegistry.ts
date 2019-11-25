@@ -4,10 +4,11 @@ import { $componentName, $componentFactory } from './constants';
 import { ComponentNameType, ComponentDescriptorType, ComponentClassType } from './types';
 import { IComponentFactory } from './IComponentFactory';
 import { IComponentInstance } from './IComponentInstance';
+import { Entity } from './Entity';
 
 export class ComponentRegistry {
 
-  factories = new Map<ComponentNameType, IComponentFactory>();
+  readonly factories = new Map<ComponentNameType, IComponentFactory>();
 
   getComponentFactory(componentDescriptor: ComponentDescriptorType) {
     const componentName = getComponentName(componentDescriptor);
@@ -32,7 +33,7 @@ export class ComponentRegistry {
   /**
    * Create a new component and attach it to the entity.
    */
-  attachComponent(entity: any, componentDescriptor: ComponentDescriptorType, data: any) {
+  attachComponent(entity: Entity, componentDescriptor: ComponentDescriptorType, data?: any) {
     const componentName = getComponentName(componentDescriptor);
     const factory = this.getComponentFactory(componentName);
     const component = factory.attachComponent(entity, data);
