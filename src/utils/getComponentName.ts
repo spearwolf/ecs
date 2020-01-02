@@ -1,6 +1,6 @@
 import { $componentName } from '../constants';
 
-export default (component) => {
+export const getComponentName = (component: any): string | Symbol => {
   switch (typeof component) {
     case 'string':
     case 'symbol':

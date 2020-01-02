@@ -13,7 +13,7 @@ export default {
   output: {
     file: path.join(root, 'dist', 'ecs.umd.js'),
     sourcemap: true,
-    sourcemapFile: path.join(root, 'dist', 'ecj.umd.js.map'),
+    sourcemapFile: path.join(root, 'dist', 'ecs.umd.js.map'),
     format: 'umd',
     name: 'ECS',
     exports: 'named',
@@ -31,6 +31,10 @@ export default {
           debug: false,
           modules: false,
           useBuiltIns: 'entry',
+          corejs: {
+            version: 3,
+            proposals: true
+          },
           targets: {
             browsers: ['> 2%', 'not dead'],
           },

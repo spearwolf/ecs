@@ -2,7 +2,7 @@
 /* eslint-env jest */
 /* eslint no-console: 0 */
 
-import ComponentRegistry from '../ComponentRegistry.js';
+import { ComponentRegistry } from '../ComponentRegistry';
 
 describe('ComponentRegistry', () => {
   describe('getComponentFactory()', () => {
@@ -19,30 +19,30 @@ describe('ComponentRegistry', () => {
     });
   });
 
-  describe('createComponent()', () => {
+  describe('attachComponent()', () => {
     const factory = {};
     const entity = {};
     const component = {};
     const data = {};
 
     beforeEach(() => {
-      factory.create = jest.fn(() => component);
+      factory.attachComponent = jest.fn(() => component);
       entity.setComponent = jest.fn();
     });
 
-    it('should call factory.create()', () => {
+    it('should call factory.attachComponent()', () => {
       const registry = new ComponentRegistry();
       registry.registerComponentFactory('foo', factory);
-      registry.createComponent(entity, 'foo', data);
+      registry.attachComponent(entity, 'foo', data);
 
-      expect(factory.create.mock.calls).toHaveLength(1);
-      expect(factory.create.mock.calls[0]).toEqual([entity, data]);
+      expect(factory.attachComponent.mock.calls).toHaveLength(1);
+      expect(factory.attachComponent.mock.calls[0]).toEqual([entity, data]);
     });
 
     it('should call entity.setComponent()', () => {
       const registry = new ComponentRegistry();
       registry.registerComponentFactory('foo', factory);
-      registry.createComponent(entity, 'foo', data);
+      registry.attachComponent(entity, 'foo', data);
 
       expect(entity.setComponent.mock.calls).toHaveLength(1);
       expect(entity.setComponent.mock.calls[0]).toEqual(['foo', component]);

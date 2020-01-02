@@ -1,1 +1,1 @@
-export { default as ComponentFactory } from './ComponentFactory.js';
+export { default as ComponentFactory } from './ComponentFactory';

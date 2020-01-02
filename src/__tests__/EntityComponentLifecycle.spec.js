@@ -9,14 +9,14 @@ import { Component, ECS, Entity } from '..';
 
 describe('Entity<>Component Lifecycle', () => {
 
-  it('$connectToEntity', () => {
+  it('component.connectToEntity(entity)', () => {
 
     const spy = sinon.spy();
 
     const Dummy = (
       @Component({ name: 'dummy' })
       class {
-        get [Entity.$connectToEntity]() { return spy; }
+        get connectToEntity() { return spy; }
       }
     );
 
@@ -28,14 +28,14 @@ describe('Entity<>Component Lifecycle', () => {
 
   });
 
-  it('$disconnectFromEntity', () => {
+  it('component.disconnectFromEntity(entity)', () => {
 
     const spy = sinon.spy();
 
     const Dummy = (
       @Component({ name: 'dummy' })
       class {
-        get [Entity.$disconnectFromEntity]() { return spy; }
+        get disconnectFromEntity() { return spy; }
       }
     );
 
@@ -58,7 +58,7 @@ describe('Entity<>Component Lifecycle', () => {
     const Dummy = (
       @Component({ name: 'dummy' })
       class {
-        [Entity.$connectToEntity](entity) {
+        connectToEntity(entity) {
           entity.once(Entity.$connectComponent, spy);
         }
       }
@@ -72,15 +72,15 @@ describe('Entity<>Component Lifecycle', () => {
 
   });
 
-  it('$destroyComponent', () => {
+  it('Entity.$deleteComponent event', () => {
 
     const spy = sinon.spy();
 
     const Dummy = (
       @Component({ name: 'dummy' })
       class {
-        [Entity.$connectToEntity](entity) {
-          entity.once(Entity.$destroyComponent, spy);
+        connectToEntity(entity) {
+          entity.once(Entity.$deleteComponent, spy);
         }
       }
     );

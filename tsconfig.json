@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+
+    "strict": true,
+    "strictNullChecks": false,
+
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitAny": true,
+
+    "allowJs": true,
+    "experimentalDecorators": true,
+    "module": "commonjs",
+    "baseUrl": "."
+
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "compileOnSave": false
+}
